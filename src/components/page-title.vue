@@ -6,7 +6,7 @@
         <!-- <img :src="datas.img" class="visible-xs"> -->
         <h1 class="liner-text">{{ info.title }}</h1>
         <p class="">{{ info.des }}</p>
-        <img v-for="(item, i) in 3" :key="i" src="../assets/img/freeze/footer-icon-white.png">
+        <img v-for="(item, i) in 3" :key="i" src="../assets/img/freeze/footer-icon-white.png" class="logo-dot">
     </div>
 </template>
 
@@ -36,5 +36,16 @@ export default {
       line-height: 26px;
       margin-top: 10px;
     }
+    .logo-dot {
+      width: 4px;
+      height: 5px;
+      margin: 10px 3.5px;
+    }
+  }
+
+  @media (max-width: 768px) {
+     .section-heading {
+        padding-top: 50px;
+     }
   }
 </style>

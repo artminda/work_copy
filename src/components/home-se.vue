@@ -247,6 +247,7 @@ export default {
   .history {
     height: 790px;
     margin:0 0 20px 0;
+    padding: 0 14px;
     h1 {
       padding-top: 51px;
       margin: 0;

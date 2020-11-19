@@ -7,7 +7,8 @@
             class="tp-caption active animated"
             v-animated="{ className: 'fadeInDown' }"
           >
-            十年老牌胜券在握
+           <img src="../assets/img/freeze/logo.png"/>
+             <h3>十年老牌胜券在握</h3>
             <p>
               行业顶尖的性能、安全解决专家，致力于为全球博弈企业提供专业、稳定、高效的技术解决方案。
             </p>
@@ -68,6 +69,9 @@ export default {
   }
 }
 .tp-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100%;
   max-height: none;
   background: url(../assets/img/transparent.jpg) no-repeat center;
@@ -76,7 +80,7 @@ export default {
   .tp-caption {
     text-align: center;
     margin: auto;
-    margin-top: 388px;
+    // margin-top: 388px;
     font-size: 24px;
     font-weight: 700;
     line-height: 34.75px;
@@ -88,6 +92,9 @@ export default {
       font-weight: 500;
       line-height: 20.27px;
       margin: 20px auto;
+    }
+    h3 {
+      color: #fff;
     }
   }
 }
@@ -244,10 +251,12 @@ export default {
     height: 100vh;
     padding-top: 100px;
     .tp-caption {
-      margin-top: 230px;
       p {
         width: 100%;
         padding: 0 15px;
+      }
+      img {
+        width: 312px;
       }
     }
   }

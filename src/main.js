@@ -8,6 +8,7 @@ import './assets/css/animate.css'
 import './assets/css/font-awesome.min.css'
 import './permission'
 import animated from './util/animated'
+
 Vue.use(animated)
 
 // axios.defaults.baseURL=process.env.VUE_APP_URL;
