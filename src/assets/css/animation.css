@@ -1,0 +1,16 @@
+.fadeInRight-active {
+     transition: all .3s ease;
+ }
+
+.fadeInRight-enter {
+    transform: translateX(10px);
+    opacity: 0;
+}
+.fadeInLeft-active {
+    transition: all .3s ease;
+}
+
+.fadeInLeft-enter {
+    transform: translateX(-10px);
+    opacity: 0;
+}

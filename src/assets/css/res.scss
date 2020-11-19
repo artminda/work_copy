@@ -1,0 +1,153 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900);
+
+body {
+    background: #0f0f0f;
+}
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+    margin: 0;
+    padding: 0;
+    letter-spacing:1.5px;
+    word-break: break-all;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+}
+
+address, cite, dfn, em, var {
+    font-style: normal;
+}
+
+code, kbd, pre, samp {
+    font-family: couriernew, courier, monospace;
+}
+
+small {
+    font-size: 12px;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    color: #000;
+}
+
+sup {
+    vertical-align: text-top;
+}
+
+sub {
+    vertical-align: text-bottom;
+}
+
+legend {
+    color: #000;
+}
+
+fieldset, img {
+    border: 0;
+}
+
+button, input, select, textarea {
+    font-size: 100%;
+    outline: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body {
+    font-family: "Noto Sans SC", Arial, "Microsoft Sans Serif", "Microsoft YaHei UI";
+    color: #666666;
+    // -webkit-font-smoothing: antialiased;
+}
+
+a {
+    font-family: "Noto Sans SC", Arial, "Microsoft Sans Serif", "Microsoft YaHei UI";
+    // -webkit-font-smoothing: antialiased;
+}
+
+div.content {
+    overflow: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    color: #b47f41;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+}
+input[type="number"]{-moz-appearance:textfield;}
+
+.visible-xs{
+    display: none;
+}
+
+.liner-text {
+    background: -webkit-linear-gradient(#f5d978, #ce9c50);
+    background: linear-gradient(#f5d978, #ce9c50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    text-shadow: none;
+}
+
+@media (min-width: 768px) {
+    .visible-xs {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .hidden-xs{
+        display: none !important;
+        img {
+            display: none;
+        }
+    }
+    .visible-xs{
+        display: block;
+    }
+}
