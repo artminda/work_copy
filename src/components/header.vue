@@ -306,7 +306,7 @@ export default {
     }
   }
   .navbar.navbar-default .navbar-collapse .nav li:hover:after {
-    background: #fff;
+    // background: #fff;
   }
   .navbar-default.scrolled .navbar-collapse .navbar-nav li:hover:after {
     background: #333;
@@ -354,7 +354,7 @@ export default {
     }
   }
   .header .navbar-default.scrolled {
-    background: #fff;
+    // background: #fff;
   }
   .navbar-default.scrolled .collapse .nav.navbar-nav {
     background: none;
