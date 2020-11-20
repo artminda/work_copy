@@ -1,13 +1,13 @@
 <template>
   <section :class="datas.class">
-    <div class="container">
-
-      <pageTitle :info="datas" /> 
+    <div class="container"> 
+    
+    <pageTitle :info="datas" :pt="true"/> 
 
       <div class="row">
         <div class="col-md-12">
           <div
-            class="about-item scrollpoint sp-effect2 active animated"
+            class="about-item scrollpoint sp-effect2 active animated "
             v-animated="{ className: 'fadeInRight' }"
           >
             <div class="historyArea hidden-xs">
@@ -61,7 +61,7 @@
 
 <script>
 // import vbutton from './button'
-import pageTitle from './page-title'
+import pageTitle from '../components/page-title'
 
 export default {
   name: 'home-header',
@@ -90,13 +90,18 @@ export default {
     },
   },
   components: {
-    pageTitle
     // vbutton,
+    pageTitle
   },
 }
 </script>
 
 <style lang="scss" scoped>
+// .history {
+//    display: flex;
+//    position: relative;
+// }
+
 .historyArea {
   display: flex;
   height: 350px;
@@ -150,13 +155,6 @@ export default {
     line-height: 48px;
     width: 530px;
     text-align: justify;
-  }
-  .advantage {
-    overflow: hidden;
-    background: url(../assets/img/freeze/bg-Advantage.jpg) no-repeat;
-    background-size: cover;
-    background-position: center center;
-    height: 900px;
   }
 }
 @media (max-width: 767px) {
@@ -245,7 +243,7 @@ export default {
     font-size: 18px;
   }
   .history {
-    height: 790px;
+    min-height: 790px;
     margin:0 0 20px 0;
     padding: 0 14px;
     h1 {

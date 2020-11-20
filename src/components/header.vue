@@ -207,12 +207,12 @@ export default {
   }
 }
 .header .navbar-default.scrolled {
-  background: rgba(255, 255, 255, 0.8);
+  // background: rgba(255, 255, 255, 0.8);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
   padding: 0;
   border-bottom: 3px solid #b47f41;
   .nav a {
-    color: #333;
+    // color: #333;
     li {
       &:hover {
         &:after {

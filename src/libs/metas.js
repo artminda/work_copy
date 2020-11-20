@@ -2,7 +2,6 @@ export const history={
     class:'history',
     title:'HISTORY',
     des:'品牌大事记',
-    // img:require('../assets/img/freeze/home_girl_m.png'),
     content:[
         '与美国昆腾国际公司（Quantum Corporation）达成深度合作；数据保护与大数据管理领域全球公认的专家，也是全球唯一推出物联网真随机数发生器的制造商。',
         '数据研发中心成立，汇聚业内顶尖研发人员，5年以上工作经验职业精算人员，致力于数据方面及核心技术的研发，让我们的专业为您保驾护航。',
@@ -12,14 +11,33 @@ export const history={
     ]
 }
 
-export const advantage={
-    class:'advantage',
-    title:'品牌优势',
-    img:require('../assets/img/freeze/home_girl2_m.png'),
-    titleTips:'BRAND ADVANTAGE',
-    content:'KK彩票拥有成熟的商业模式、精密的数据模型、强大的核心技术，我们对行业现状及发展趋势具有深刻的理解，可以迅速打造各类符合市场趋势、适应市场变化的完善商业链。我们拥有绝对的自主创新能力及敏锐的市场洞察力，致力于为客户量身打造长期可持续性发展的产品。\n' +
-        '                            <br>\n' +
-        '                            我们相信：只要抟心揖志做不可取代的产品，并始终将用户的利益置于第一位，永远是保障持久发展的正确方向。'
-
+export const products={
+    class:'products',
+    title:'PRODUCTS',
+    des:'外接式彩票系统',
+    img1:require('../assets/img/freeze/banner01.png'),
+    img2:require('../assets/img/freeze/banner02.png'),
+    img3:require('../assets/img/freeze/banner03.png'),
 }
 
+export const about={
+    class:'about',
+    title:'ABOUT US',
+    des:'关于KK彩票',
+    img1:require('../assets/img/freeze/banner04.jpg'),
+    titleTips1:'公司简介',
+    content1:'KK彩票是一家专为博弈企业提供服务的大型技术支持公司。我们聚集了众多业内顶尖人才，历经十年打磨，组成了一支包括研发、运维、数值精算、产品、交互设计、市场分析在内，全方位一体化的强大战略团队。并从创建初始，便同美国昆腾国际公司（Quantum Corporation）达成深度合作，延续至今！集团拥有10年以上的行业经验，并一直致力于技术创新，我们的宗旨是用卓越的产品为客户带来巨额的稳定收益。',
+    titleTips2:'品牌理念',
+    content2:'不忘初心，逐梦前行，是我们一直贯彻的理念，我们相信只要抟心揖志做不可取代的产品，以用户的角度思考为用户服务，并始终将用户的利益置于第一位，永远是保障持久发展的正确方向。我们拥有成熟的商业模式、精密的数据模型、强大的核心技术，我们对行业现状及发展趋势具有深刻的理解，可以迅速打造各类符合市场趋势、适应市场变化的完善商业链。我们拥有绝对的自主创新能力及敏锐的市场洞察力，致力于为客户量身打造长期可持续性发展的产品。'
+}
+
+export const contant={
+    class:'contant',
+    title:'CONTACT',
+    des:'联系我们', 
+}
+
+
+// content:'KK彩票拥有成熟的商业模式、精密的数据模型、强大的核心技术，我们对行业现状及发展趋势具有深刻的理解，可以迅速打造各类符合市场趋势、适应市场变化的完善商业链。我们拥有绝对的自主创新能力及敏锐的市场洞察力，致力于为客户量身打造长期可持续性发展的产品。\n' +
+//         '                            <br>\n' +
+//         '                            我们相信：只要抟心揖志做不可取代的产品，并始终将用户的利益置于第一位，永远是保障持久发展的正确方向。'

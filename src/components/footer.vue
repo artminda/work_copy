@@ -1,42 +1,29 @@
 <template>
     <footer>
-        <div class="container">
-            <div class="rights">
-                <img src="../assets/img/freeze/footer-icon.png" alt="">
-                <p>KK彩票欢迎您的加入！</p>
-            </div>
-        </div>
+            <div class="logo">
+              <img src="../assets/img/freeze/logo.png" alt="">
+            </div>    
+              <p class="col-12">©2020 by KK彩票, All Rights Reserved.</p>            
     </footer>
 </template>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 
  footer{
      text-align: center;
      background: #0f0906;
-     height: 60px;
-     padding: 0;
+     height: 182px;
      color: #fff;
      display: flex;
-     display: flex;
+     flex-direction: column;
      align-items: center;
- }
- .rights {
-     display: flex;
-     align-items: center;
-     text-align: center;
      justify-content: center;
-     /*line-height: 60px;*/
- }
- .rights p{
-     margin-left: 20px;
- }
- .visible-xs{
-     display: none;
- }
- @media (max-width: 640px){
-     footer{
-         background: #fff;
-         color: #b47f41;
+     .logo {
+         width: 100%;
+       img {  
+         width: 134px;
+         height: 51px;
+         margin-bottom: 24px;
+       } 
      }
  }
 

@@ -3,11 +3,11 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store'
 import axios from 'axios'
+import animated from './util/animated'
 import './plugins/axios'
 import './assets/css/animate.css'
 import './assets/css/font-awesome.min.css'
 import './permission'
-import animated from './util/animated'
 
 Vue.use(animated)
 

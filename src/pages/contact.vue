@@ -1,21 +1,21 @@
 <template>
     <div>
         <tp-banner :url="url" class="tp-banner-container ">
-            <img src="../assets/img/freeze/text-contact-tp-banner.png" alt="">
+            <!-- <img src="../assets/img/freeze/text-contact-tp-banner.png" alt=""> -->
         </tp-banner>
         <div style="width: 95px;height: 153px;position: fixed;bottom: 100px;right: 0px;border-radius: 5px;z-index: 999">
             <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=939330888&amp;site=qq&amp;menu=yes">
-                <img border="0" src="http://wpa.qq.com/pa?p=2:939330888:53" alt="点击这里给我发消息" title="点击这里给我发消息">
+                <!-- <img border="0" src="http://wpa.qq.com/pa?p=2:939330888:53" alt="点击这里给我发消息" title="点击这里给我发消息"> -->
             </a>
         </div>
         <div class="wrapper">
             <section id="contact-us">
-                <div class="container animated fadeInDown">
+                <div class="container animated fadeInDown ">
                     <div class="contact-item">
                         <div class="tips" v-if="isTips">
                             <span>{{msg}}</span>
                         </div>
-                        <img class="hidden-xs" src="../assets/img/freeze/footer-icon-white.png">
+                        <!-- <img class="hidden-xs" src="../assets/img/freeze/footer-icon-white.png"> -->
                         <form action="" method="post">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="姓名*" v-model="form.name">
@@ -53,7 +53,6 @@
         name:'contact',
         data(){
             return{
-                url:require('../assets/img/freeze/bg-contact-banner.jpg'),
                 isTips:false,
                 form:{
                     name:'',

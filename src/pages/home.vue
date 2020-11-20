@@ -4,31 +4,36 @@
       <div class="tp-banner-container">
         <div class="tp-banner">
           <div
-            class="tp-caption active animated"
+            class="tp-caption active animated "
             v-animated="{ className: 'fadeInDown' }"
           >
-           <img src="../assets/img/freeze/logo.png"/>
-             <h3>十年老牌胜券在握</h3>
+            <div class="logoBox">
+              <img src="../assets/img/freeze/rainbow.png" class="back" />
+              <img src="../assets/img/freeze/logo.png" class="front"/>
+            </div>  
+            <h3>十年老牌胜券在握</h3>
             <p>
               行业顶尖的性能、安全解决专家，致力于为全球博弈企业提供专业、稳定、高效的技术解决方案。
             </p>
           </div>
-          <div class="tp-bannertimer"></div>
         </div>
       </div>
     </header>
-    <home-se :datas="metas.history"></home-se>
-    <section class="about">
-      <div class="container">
-         
-      </div>
-    </section>
-    <!-- <home-se ></home-se> -->
+    <home-his :datas="metas.history"></home-his>
+    <homeProducts :datas="metas.products"></homeProducts>
+    <homeAbout :datas="metas.about"></homeAbout>
+    <homeContant :datas="metas.contant"></homeContant>
   </div>
 </template>
 <script>
 import * as metas from '../libs/metas'
-import homeSe from '../components/home-se'
+import homeHis from '../components/home-his'
+import homeAbout from '../components/home-about'
+import homeContant from '../components/home-contant'
+import homeProducts from '../components/home-products'
+import Product from './product.vue'
+import HomeAbout from '../components/home-about.vue'
+import Contact from './contact.vue'
 
 export default {
   name: 'Home',
@@ -39,10 +44,14 @@ export default {
     }
   },
   components: {
-    homeSe,
+    homeHis,
+    homeAbout,
+    homeContant,
+    homeProducts,
   },
 }
 </script>
+
 <style lang="scss" scoped>
 // input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 //     -webkit-appearance: none !important;
@@ -67,182 +76,55 @@ export default {
       height: 60%;
     }
   }
-}
-.tp-banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  max-height: none;
-  background: url(../assets/img/transparent.jpg) no-repeat center;
-  background-size: cover;
-  overflow: hidden;
-  .tp-caption {
-    text-align: center;
-    margin: auto;
-    // margin-top: 388px;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 34.75px;
-    color: #fff;
-    p {
-      position: relative;
-      width: 360px;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 20.27px;
-      margin: 20px auto;
-    }
-    h3 {
-      color: #fff;
-    }
-  }
-}
-.slotholder {
-  display: none;
-}
-.about {
-  overflow: hidden;
-  background: url(../assets/img/freeze/bg-pros.jpg) no-repeat;
-  background-size: cover;
-  height: 900px;
-  .section-heading {
-    h1 {
-      color: #fff;
-    }
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  .about-item {
-    text-align: center;
-    font-size: 16px;
-    line-height: 24px;
-    color: #ffffff;
-    width: 510px;
-    height: 200px;
-    background: rgba(180, 127, 65, 0.4);
-    margin-top: 30px;
-    h5 {
-      color: #fff;
-    }
-    .fa {
-      margin-top: 25px;
-      -webkit-transition: all 0.25s ease-in-out;
-      -moz-transition: all 0.25s ease-in-out;
-      -ms-transition: all 0.25s ease-in-out;
-      -o-transition: all 0.25s ease-in-out;
-      transition: all 0.25s ease-in-out;
-    }
-    span {
-      font-size: 16px;
-      width: 100%;
-      line-height: 24px;
-      color: #ffffff;
-      display: block;
-      margin: 15px auto;
-      letter-spacing: 2px;
-    }
-  }
-  .section-heading {
-    margin-top: 135px;
-    letter-spacing: 10px;
-  }
-  .row {
-    width: 1080px;
-    margin: 0 auto;
-  }
-}
-.col-xs-12 {
-  width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-@media (min-width: 768px) {
-  .tp-down,
-  .visible-xs {
-    display: none;
-  }
-  .col-sm-6 {
-    min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
-    float: left;
-  }
-  .section-heading {
-    text-align: left;
-    margin-top: 100px;
-    h1 {
-      display: inline-block;
-      font-size: 48px;
-      font-weight: 500;
-      margin-bottom: 0;
-    }
-    p {
-      letter-spacing: 3px;
-      margin-left: 5px;
-      font-size: 18px;
-      color: #717171;
-      font-weight: 300;
-      margin-top: 10px;
-    }
-  }
-  .row p {
-    color: #333333;
-    font-size: 20px;
-    line-height: 48px;
-    width: 530px;
-    text-align: justify;
-  }
-}
-@media (max-width: 767px) {
-  .block {
-    display: -webkit-box;
-    display: -ms-flexbox;
+
+  .tp-banner {
     display: flex;
-    flex-flow: column-reverse nowrap;
-    margin: 20px auto;
-    font-size: 18px;
-    color: #333;
-    line-height: 36px;
-    padding: 10px;
-  }
-  .section-heading {
-    img {
-      width: 80%;
-      height: 80%;
-      margin: 0 auto;
-    }
-    text-align: center;
-    p {
-      display: none;
-    }
-    h1 {
-      display: block;
-      font-size: 48px;
-      font-weight: 500;
-      margin-bottom: 0;
-    }
-  }
-  .about {
-    height: auto;
-    background-position: center;
-    padding-bottom: 90px;
-    /*padding-right:20px;*/
-    .about-item {
-      margin: 20px auto;
-      width: 100%;
-      /*padding-right: 20px;*/
-      h5 {
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-height: none;
+    background: url(../assets/img/transparent.jpg) no-repeat center;
+    background-size: cover;
+    overflow: hidden;
+    .tp-caption {
+      text-align: center;
+      margin: auto;
+      // margin-top: 388px;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 34.75px;
+      color: #fff;
+      .logoBox {
+        display: flex;
+        white-space: nowrap;
+        width: 837px;
+        height: 321px;
+        justify-content: center;
+        align-items: center;
+        .front {
+          position: absolute;
+          display: inline-block;
+          z-index: 4;
+        }
+        .back {
+          position: absolute;
+          display: inline-block;
+          z-index: 3;
+          left: -180px;
+          width: 160%;
+        }
+      }
+      p {
+        position: relative;
+        width: 360px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20.27px;
+        margin: 20px auto;
+      }
+      h3 {
         color: #fff;
       }
-    }
-    .section-heading {
-      margin-top: 50px;
-      letter-spacing: 10px;
-    }
-    .row {
-      width: 100%;
-      margin: 0 auto;
     }
   }
 }
@@ -257,61 +139,6 @@ export default {
       }
       img {
         width: 312px;
-      }
-    }
-  }
-  .section-heading h1 {
-    display: block;
-    font-size: 28px;
-    font-weight: 500;
-    margin: 20px 0;
-    color: #333;
-  }
-
-  .about {
-    .visible-xs {
-      margin: 0 auto;
-    }
-    .col-xs-12 {
-      padding: 0;
-    }
-    .row {
-      width: 100%;
-    }
-    .about-item {
-      background: #fff;
-      border-radius: 100px;
-      height: 60px;
-      overflow: hidden;
-      margin-top: 40px;
-      margin-left: 0;
-
-      .visible-xs {
-        width: 100%;
-      }
-      h5 {
-        color: #333;
-        text-align: left;
-        font-size: 12px;
-        margin-top: 5px;
-      }
-      span {
-        color: #333;
-        text-align: left;
-        font-size: 12px;
-        padding: 0;
-        margin-top: 0;
-        line-height: 14px;
-        /*width: 100%;*/
-      }
-      img {
-        background: linear-gradient(-45deg, #b47f41 0%, #e4b87b 100%);
-        border-radius: 50px;
-        float: left;
-        padding: 10px;
-        margin: 10px !important;
-        display: block;
-        height: 70%;
       }
     }
   }

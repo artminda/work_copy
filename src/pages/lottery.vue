@@ -1,7 +1,7 @@
 <template>
     <div>
         <tp-banner :url="url">
-            <img src="../assets/img/freeze/text-lottery-tp-banner.png" alt="">
+            <!-- <img src="../assets/img/freeze/text-lottery-tp-banner.png" alt=""> -->
         </tp-banner>
         <section class="loto">
             <div class="container">
@@ -72,7 +72,6 @@
                 loading:false,
                 showPop: false,
                 vhId:'',
-                url: require('../assets/img/freeze/bg-lottery-banner.jpg'),
                 country: '中国',//一级默认数据
                 countryName: ['中国', '外国'],//一级
                 lotteryArr: [],//三级

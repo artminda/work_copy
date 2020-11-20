@@ -12,17 +12,17 @@
         props:['buttonText'],
         data(){
             return{
-                text:this.buttonText
+                text: this.buttonText
             }
         },
         methods:{
             fn(){
-                if (this.text=='点击查看详情'){
-                    this.text='收起'
-                }else {
-                    this.text='点击查看详情'
-                }
-                this.$emit('chack',this.text)
+                // if (this.text=='点击查看详情'){
+                //     this.text='收起'
+                // }else {
+                //     this.text='点击查看详情'
+                // }
+                // this.$emit('chack',this.text)
             },
         },
     }
@@ -33,11 +33,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 200px;
-        height: 50px;
+        width: 214px;
+        height: 38.08px;
         margin: 0 auto;
         color: #fff;
-        background: #b47f41;
+        background: #FF0020;
+        border-radius: 5px;
         cursor: pointer;
         user-select:none;
     }
