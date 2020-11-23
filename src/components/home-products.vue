@@ -2,7 +2,7 @@
   <section :class="datas.class">
     <div class="container"> 
     
-    <pageTitle :info="datas" :dark="true" :pt="true"/> 
+    <pageTitle :info="datas" :dark="2" :pt="true"/> 
 
     <div class="animatedBox">   
       <!-- right   -->

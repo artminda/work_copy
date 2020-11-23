@@ -1,51 +1,40 @@
 <template>
-    <div class="product">
-     
+  <div class="product">
+    <div v-for="(items,i) in  metas.products_info" :key="i">  
+      <commonInfo :datas="items" />
     </div>
+    <homeContant :datas="metas.contant"/>
+  </div>
 </template>
 <script>
-   
-    export default {
-        name:'product',
+import * as metas from '../libs/metas'
+import commonInfo from '../components/common-info'
+import homeContant from '../components/home-contant'
+export default {
+  name: 'product',
 
-        data(){
-            return{
-            }
-        },
-        methods:{
-
-        },
-        components:{
-           
-        }
+  data() {
+    return {
+      metas,
     }
+  },
+  methods: {},
+  components: {
+    commonInfo,
+    homeContant
+  },
+}
 </script>
 <style lang="scss" scoped>
-    section {
-        position: relative;
-        padding-bottom: 90px;
-    }
-    .section-heading {
-        margin: 100px 0 40px;
-        text-align: center;
-        h1{
-            display: inline-block;
-            font-size: 48px;
-            font-weight: 500;
-            margin-bottom: 0;
-        }
-    }
-    @media (min-width: 768px) {
-     
-    }
-    @media (max-width: 991px){
-     
-    }
-    @media (max-width: 767px){
-      
-    }
-    @media screen and (max-width: 640px){
+.product {
+    padding-top: 75px;
+}
 
-     
-    }
+@media (max-width: 767px) {
+  .product {
+    padding-top: 62px; 
+  }
+}
+@media screen and (max-width: 640px) {
+}
 </style>

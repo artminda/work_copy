@@ -2,7 +2,7 @@
   <section :class="datas.class">
     <div class="container"> 
     
-    <pageTitle :info="datas" :dark="true" /> 
+    <pageTitle :info="datas" :dark="2" /> 
 
     <div class="iconBox">
       <div class="icon">
@@ -16,15 +16,15 @@
         <div class="col-12">
           <img src="../assets/img/freeze/skype.png" alt="">
         </div>
-        <span class="col-12">Phone/Telegram</span>
-        <span class="g-t">+63 888 888 8888</span>
+        <span class="col-12">Skype</span>
+        <span class="g-t">love_n_peace</span>
       </div>
       <div class="icon">
         <div class="col-12">
           <img src="../assets/img/freeze/mail.png" alt="">
         </div>
-        <span class="col-12">Phone/Telegram</span>
-        <span class="g-t">+63 888 888 8888</span>
+        <span class="col-12">Email</span>
+        <span class="g-t">love@KKgaming.com</span>
       </div>
     </div>
 
@@ -88,15 +88,20 @@ export default {
       }
       .g-t {
         color: #846029;
+        white-space: nowrap;
       }
     }
   }
 }
 
  @media (max-width: 640px){
+   .contant {
+     .container {
+       padding-top: 47px;
      .iconBox{
         flex-direction: column;
      }
+   }
  }
-
+}
 </style>

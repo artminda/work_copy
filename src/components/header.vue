@@ -16,7 +16,7 @@
         </div>
         <div class="collapse">
           <ul class="nav" :class="{ 'navbar-nav': homeHeader }">
-            <router-link to="/"><li>品牌介绍</li></router-link>
+            <router-link to="/"><li>品牌首页</li></router-link>
             <router-link to="/product"><li>产品介绍</li></router-link>
             <router-link to="/lottery"><li>开奖中心</li></router-link>
             <router-link to="/contact"><li>联系我们</li></router-link>
@@ -24,7 +24,7 @@
         </div>
         <div class="collapse navbar-collapse" v-show="flag">
           <ul class="nav" :class="{ 'navbar-nav': homeHeader }">
-            <router-link to="/"><li>品牌介绍</li></router-link>
+            <router-link to="/"><li>品牌首页</li></router-link>
             <router-link to="/product"><li>产品介绍</li></router-link>
             <router-link to="/lottery"><li>开奖中心</li></router-link>
             <router-link to="/contact"><li>联系我们</li></router-link>
@@ -178,6 +178,7 @@ export default {
 }
 .container {
   display: flex;
+  padding: 0;
   justify-content: space-between;
 }
 .navbar.navbar-default {
@@ -189,7 +190,7 @@ export default {
   color: #fff;
   .nav a {
     color: #ffffff;
-    background: none;
+    // background: none;
     li {
       &:hover {
         &:after {
@@ -262,8 +263,8 @@ export default {
         display: flex;
         flex-direction: column;
         li {
-          padding: 2px;
-          font-size: 16px;
+          font-size: 14px;
+          line-height: 54px;
           &:hover {
             &:after {
               content: '';
@@ -279,9 +280,6 @@ export default {
               transition: all 0.25s ease-in-out;
             }
           }
-        }
-        a {
-          padding: 5px;
         }
       }
     }
@@ -331,13 +329,12 @@ export default {
     }
     .collapse {
       border: none;
-      padding: 0 20px;
       ul {
-        background: rgba(255, 255, 255, 0.8);
+        // background: rgba(255, 255, 255, 0.8);
         margin-top: 10px;
       }
       .nav li {
-        color: #333;
+        color: #fff;
         margin: auto;
       }
     }
@@ -357,11 +354,11 @@ export default {
     // background: #fff;
   }
   .navbar-default.scrolled .collapse .nav.navbar-nav {
-    background: none;
+    background: #1C1C1C;
   }
   .navbar-toggle {
     border-radius: 50%;
-    border: 2px solid #b47f41 !important;
+    border: 2px solid transparent !important;
     color: #b47f41;
     background: none !important;
     .fa-lg {
@@ -370,8 +367,8 @@ export default {
   }
   .navbar-collapse {
     text-align: center;
-    a {
-      border-top: 1px solid #e8d8c5;
+    .router-link-exact-active {
+      background: #CE9C50;
     }
   }
   .header .navbar-default.scrolled .navloto {

@@ -8,8 +8,8 @@
             v-animated="{ className: 'fadeInDown' }"
           >
             <div class="logoBox">
-              <img src="../assets/img/freeze/rainbow.png" class="back" />
-              <img src="../assets/img/freeze/logo.png" class="front"/>
+              <!-- <img src="../assets/img/freeze/rainbow.png" class="back" /> -->
+              <img src="../assets/img/freeze/logo_rainbow.png" class="logo"/>
             </div>  
             <h3>十年老牌胜券在握</h3>
             <p>
@@ -21,31 +21,28 @@
     </header>
     <home-his :datas="metas.history"></home-his>
     <homeProducts :datas="metas.products"></homeProducts>
-    <homeAbout :datas="metas.about"></homeAbout>
+    <commonInfo :datas="metas.about"></commonInfo>
     <homeContant :datas="metas.contant"></homeContant>
   </div>
 </template>
 <script>
 import * as metas from '../libs/metas'
+import commonInfo from '../components/common-info'
 import homeHis from '../components/home-his'
-import homeAbout from '../components/home-about'
 import homeContant from '../components/home-contant'
 import homeProducts from '../components/home-products'
-import Product from './product.vue'
-import HomeAbout from '../components/home-about.vue'
-import Contact from './contact.vue'
 
 export default {
   name: 'Home',
   data() {
     return {
       metas,
-      isShow: false,
+      // isShow: false,
     }
   },
   components: {
     homeHis,
-    homeAbout,
+    commonInfo,
     homeContant,
     homeProducts,
   },
@@ -97,25 +94,18 @@ export default {
       .logoBox {
         display: flex;
         white-space: nowrap;
-        width: 837px;
+        // width: 837px;
         height: 321px;
         justify-content: center;
         align-items: center;
-        .front {
-          position: absolute;
-          display: inline-block;
-          z-index: 4;
-        }
-        .back {
-          position: absolute;
-          display: inline-block;
-          z-index: 3;
-          left: -180px;
-          width: 160%;
+        .logo {
+          width: 1000px;
+          position: relative;
         }
       }
       p {
         position: relative;
+        top:-40px;
         width: 360px;
         font-size: 14px;
         font-weight: 500;
@@ -123,24 +113,39 @@ export default {
         margin: 20px auto;
       }
       h3 {
+        position: relative;
+        top:-40px;
         color: #fff;
       }
     }
   }
 }
-@media screen and (max-width: 640px) {
-  .tp-banner-container {
-    height: 100vh;
-    padding-top: 100px;
-    .tp-caption {
-      p {
-        width: 100%;
-        padding: 0 15px;
-      }
-      img {
-        width: 312px;
-      }
+@media screen and (max-width: 768px) {
+    .tp-banner-container {
+      height: 100vh;
+      padding-top: 100px;
+      .tp-banner {
+          .tp-caption {
+            .logoBox {
+              overflow: hidden;
+              .logo {
+                width: 650px ;  
+              }
+          }
+          p {
+            max-width: 326px;
+            padding: 0 15px;
+          }
+        }
     }
   }
 }
+
+//  p {
+//         width: 100%;
+//         padding: 0 15px;
+//       }
+//       img {
+//         width: 312px;
+//       }
 </style>
