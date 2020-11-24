@@ -6,6 +6,7 @@
         <h1 class="liner-text" :class="{'dark':dark===2, 'title-pt':pt}">{{ info.title }}</h1>
         <p class="">{{ info.des }}</p>
         <img v-for="(item, i) in 3" :key="i" src="../assets/img/freeze/footer-icon-white.png" class="logo-dot">
+        <p v-if="info.desInfo" class="desInfo">{{info.desInfo}}</p>
     </div>
 </template>
 
@@ -42,6 +43,11 @@ export default {
       line-height: 26px;
       margin-top: 10px;
     }
+    .desInfo {
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 27px;
+    }
     .logo-dot {
       width: 4px;
       height: 5px;
@@ -52,6 +58,11 @@ export default {
   @media (max-width: 768px) {
      .section-heading {
         padding-top: 0px;
+        .desInfo {
+          font-size: 12px;
+          line-height: 20px;
+          padding: 0 10px;
+        }
      }
   }
 </style>

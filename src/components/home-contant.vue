@@ -1,8 +1,8 @@
 <template>
-  <section :class="datas.class">
+  <section :id="datas.class" :class="datas.class">
     <div class="container"> 
     
-    <pageTitle :info="datas" :dark="2" /> 
+    <pageTitle :info="datas" :dark="2" />
 
     <div class="iconBox">
       <div class="icon">

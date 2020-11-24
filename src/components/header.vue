@@ -1,8 +1,8 @@
 <template>
   <header class="header">
     <nav
-      class="navbar navbar-default navbar-fixed-top"
-      :class="{ scrolled: homeHeader, navloto: navloto }"
+      class="navbar navbar-default"
+      :class="{ scrolled: homeHeader }"
     >
       <div class="container">
         <div class="navbar-header">
@@ -10,29 +10,32 @@
             <img src="../assets/img/freeze/logo.png" class="logo hidden-xs" />
             <img src="../assets/img/freeze/logo-m.png" class="logo visible-xs" />
           </router-link>
+          {{flag}}
           <button type="button" class="navbar-toggle" @click="toggle">
             <span class="fa fa-bars fa-lg"></span>
           </button>
         </div>
+        <!-- pc -->
         <div class="collapse">
-          <ul class="nav" :class="{ 'navbar-nav': homeHeader }">
-            <router-link to="/"><li>品牌首页</li></router-link>
+          <ul class="nav items">
+            <router-link to="/" v-scroll-to="'#tp_banner'"><li @click="toggle">品牌首页</li></router-link>
             <router-link to="/product"><li>产品介绍</li></router-link>
             <router-link to="/lottery"><li>开奖中心</li></router-link>
-            <router-link to="/contact"><li>联系我们</li></router-link>
+            <router-link to="/" v-scroll-to="'#contant'" class="no-act"><li @click="toggle">联系我们</li></router-link>
           </ul>
         </div>
+        <!-- mobile -->
         <div class="collapse navbar-collapse" v-show="flag">
           <ul class="nav" :class="{ 'navbar-nav': homeHeader }">
-            <router-link to="/"><li>品牌首页</li></router-link>
+            <router-link to="/" v-scroll-to="'#tp_banner'"><li @click="toggle">品牌首页</li></router-link>
             <router-link to="/product"><li>产品介绍</li></router-link>
             <router-link to="/lottery"><li>开奖中心</li></router-link>
-            <router-link to="/contact"><li>联系我们</li></router-link>
+            <router-link to="/" v-scroll-to="'#contant'" class="no-act"><li @click="toggle">联系我们</li></router-link>
           </ul>
         </div>
       </div>
     </nav>
-    <div class="adv" :class="{adv_none:homeHeader}">
+    <div class="adv" :class="{adv_none: homeHeader || flag}">
       <img src="../assets/img/freeze/logo02.png" class="logo" alt="云博會" />
       <span>2088 KK彩票行銷活動参展盛况</span>
       <sBtn class="hidden-xs" />
@@ -99,7 +102,7 @@ export default {
         this.$route.name === 'product'
       ) {
         this.homeHeader = true
-        this.navloto = true
+        // this.navloto = true
       } else {
         this.homeHeader = false
       }
@@ -117,52 +120,78 @@ export default {
   left: 0;
   right: 0;
   z-index: 10;
-}
-.adv {
-  display: flex;
-  justify-content: center;
-  align-items: center;     
-  text-align: center;
-  height: 52px;
-  // line-height: 52px;
-  background: #ce9c50;
-  color: #fff;
-    span {
-      margin: 0 10px;
-    }
-    .logo {
+    .nav a {
+    color: #fff;
+    background: none;
+    display: flex;
+    li {
       position: relative;
-      top: 8px;
-      margin: 0 10px;
-    }
-}
-.adv_none {
-  display: none;
-}
-.nav a {
-  color: #fff;
-  background: none;
-  display: flex;
-  li {
-    position: relative;
-    &:hover {
-      transition: all 0.25s ease-in-out;
-      &:after {
-        content: '';
-        width: 32px;
-        background: none;
-        height: 4px;
-        position: absolute;
-        bottom: 18px;
-        z-index: 99999;
-        left: 20px;
-        border-radius: 5em;
-        color: #333;
+      &:hover {
         transition: all 0.25s ease-in-out;
+        &:after {
+          content: '';
+          background: #333;
+          width: 53px;
+          background: none;
+          height: 2px;
+          position: absolute;
+          bottom: 22px;
+          z-index: 99999;
+          left: 23px;
+          border-radius: 5em;
+          transition: all 0.25s ease-in-out;
+        }
       }
     }
   }
+  .items {
+    &:hover {
+        transition: all 0.25s ease-in-out;
+        &:after {
+          content: '';
+          width: 53px;
+          background: none;
+          height: 2px;
+          position: absolute;
+          bottom: 22px;
+          z-index: 99999;
+          left: 23px;
+          border-radius: 5em;
+          transition: all 0.25s ease-in-out;
+        }
+      }
+    .router-link-exact-active {
+      background: url(../assets/img/freeze/select01.png) no-repeat center 68%;   
+    }
+    .router-link-exact-active.no-act {
+      background: none;   
+    }
+  }
+
+    .adv {
+    display: flex;
+    justify-content: center;
+    align-items: center;     
+    text-align: center;
+    height: 52px;
+    // line-height: 52px;
+    background: #ce9c50;
+    color: #fff;
+      span {
+        margin: 0 10px;
+      }
+      .logo {
+        position: relative;
+        top: 8px;
+        margin: 0 10px;
+      }
+  }
+  .adv_none {
+    display: none;
+  }
 }
+
+
 .navbar-default.scrolled .navbar-header {
   button {
     display: none;
@@ -188,17 +217,11 @@ export default {
   // padding-bottom: 20px;
   transition: all 0.25s ease-in-out;
   color: #fff;
+
   .nav a {
-    color: #ffffff;
-    // background: none;
-    li {
-      &:hover {
-        &:after {
-          background: #fff;
-        }
-      }
-    }
+    color: #fff;
   }
+  
   .logo {
     max-width: 180px;
   }
@@ -239,6 +262,9 @@ export default {
   }
   .collapse {
     display: block;
+    .navbar-pc  .router-link-exact-active{
+       color: turquoise;
+    }
   }
   .navbar-collapse {
     display: none;
@@ -247,6 +273,10 @@ export default {
 @media screen and (max-width: 768px) {
   .navbar.navbar-default,
   .navbar-default.scrolled {
+    .logo {
+      width: auto;
+      max-height: 40px;
+    }
     .container {
       display: flex;
       flex-direction: column;
@@ -262,6 +292,12 @@ export default {
       .nav {
         display: flex;
         flex-direction: column;
+        .router-link-exact-active {
+         background: #CE9C50;
+        }
+        .router-link-exact-active.no-act {
+          background: none;
+        }
         li {
           font-size: 14px;
           line-height: 54px;
@@ -270,7 +306,7 @@ export default {
               content: '';
               width: 32px;
               background: none;
-              height: 4px;
+              // height: px;
               position: absolute;
               bottom: -5px;
               z-index: 99999;
@@ -288,6 +324,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      a {padding: 15px 20px;}
       .navbar-toggle {
         display: inline-block;
         height: 50%;
@@ -303,12 +340,6 @@ export default {
       }
     }
   }
-  .navbar.navbar-default .navbar-collapse .nav li:hover:after {
-    // background: #fff;
-  }
-  .navbar-default.scrolled .navbar-collapse .navbar-nav li:hover:after {
-    background: #333;
-  }
   .nav a li {
     width: 100%;
   }
@@ -323,10 +354,6 @@ export default {
     }
   }
   .navbar.navbar-default {
-    .logo {
-      width: auto;
-      max-height: 40px;
-    }
     .collapse {
       border: none;
       ul {
@@ -367,9 +394,6 @@ export default {
   }
   .navbar-collapse {
     text-align: center;
-    .router-link-exact-active {
-      background: #CE9C50;
-    }
   }
   .header .navbar-default.scrolled .navloto {
     background-color: #fff;

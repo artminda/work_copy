@@ -37,15 +37,23 @@ export const contant={
     des:'联系我们', 
 }
 
+export const products_contant={
+    class:'contant',
+    title:'TRY IT OUT!',
+    des:'产品试玩',
+    desInfo: '马上联系专员取得更多资讯 包括产品试玩:)'
+}
+
 export const products_info=[{
     i:1, 
     class:'pro-a',
     direction: 'reverse',
     title:'LOTTERY API',
     des:'外接式彩票系统',
-    img1:require('../assets/img/freeze/banner01.png'),
-    img1:require('../assets/img/freeze/banner02.png'),
-    img1:require('../assets/img/freeze/banner03.png'),
+    imgs:[require('../assets/img/freeze/gallery/banner_b01.jpg'),
+    require('../assets/img/freeze/gallery/banner_b02.jpg'),
+    require('../assets/img/freeze/gallery/banner_b03.jpg'),
+    require('../assets/img/freeze/gallery/banner_b04.jpg')],
     content:'KK彩票历时多年，通过多国政府、第三方机构、领域专家的精诚合作，共同实现了数字彩票系统全球化战略。在行业内引起了极大的反响和一致的肯定。KK彩票提供多语言、多币种国际化支持、及百种彩票、千种玩法全球游戏覆盖，向20多个国家和地区的用户提供了最专业的服务。KK彩票研发的独有算法体系，历时多年，多维度信息压缩，杜绝预测可能性，以确保公平、公正、公开！',
 },
 

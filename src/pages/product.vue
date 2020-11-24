@@ -3,7 +3,7 @@
     <div v-for="(items,i) in  metas.products_info" :key="i">  
       <commonInfo :datas="items" />
     </div>
-    <homeContant :datas="metas.contant"/>
+    <homeContant :datas="metas.products_contant"/>
   </div>
 </template>
 <script>

@@ -7,17 +7,18 @@
     <div class="Box row active animated " :class="{'row-reverse ':datas.direction === 'reverse'}"
             v-animated="{ className: 'fadeInRight' }">
 
-      <p class="des hidden-xs">{{datas.desInfo}}</p>
+      <!-- <p class="des hidden-xs">{{datas.desInfo}}</p> -->
   
         <!-- 圖片 -->
         <div class="col-6 col-xs-12 about-pic">
-          <img :src="datas.img1" alt="info">
+          <gallery v-if="datas.i===1" :datas="datas.imgs"/>
+          <img v-else :src="datas.img1" alt="info">
         </div>
 
         <pageTitle :info="datas" :dark="datas.i===1?2:1" class="visible-xs pt"/>
 
         <!-- 內文 -->
-        <div class="col-6 col-xs-12">    
+        <div class="col-6 col-xs-12" :class="{'shrink':datas.i === 1}">    
         <template v-if="datas.class === 'about'"> 
           <div class="col-12 text">
             <h1 class="liner-text">{{datas.titleTips1}}</h1>
@@ -37,7 +38,7 @@
                 </div>
             </div>
             <div v-else class="col-12">
-              <p class="des visible-xs">{{datas.desInfo}}</p>      
+              <!-- <p class="des visible-xs">{{datas.desInfo}}</p>       -->
               <p v-for="(items, i) in datas.content" :key="`${items}-${i}`">
                 <img src="../assets/img/freeze/footer-icon-white.png" class="logo-dot">{{items}}
               </p>
@@ -54,6 +55,7 @@
 <script>
 import pageTitle from '../components/page-title'
 import btn from '../components/button'
+import gallery from '../components/gallery'
 
 export default {
   name: 'about',
@@ -70,6 +72,7 @@ export default {
   },
   components: {
     pageTitle,
+    gallery,
     btn
   },
 }
@@ -101,6 +104,9 @@ export default {
     color: #fff;
   .Box {
     padding-top: 10px;
+    .shrink {
+      flex: 0 0 43%;
+    }
   }  
   .des {
     margin: 20px auto;
@@ -147,6 +153,9 @@ export default {
     padding-bottom: 0px;
     .Box {
       padding-top: 33px !important;
+      .shrink {
+      flex: 0 0 100%;
+    }
       .pt {
         padding-top: 38px;
       }

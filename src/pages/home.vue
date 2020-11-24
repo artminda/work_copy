@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <header>
-      <div class="tp-banner-container">
+      <section id="tp_banner" class="tp-banner-container">
         <div class="tp-banner">
           <div
             class="tp-caption active animated "
@@ -17,7 +17,7 @@
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </header>
     <home-his :datas="metas.history"></home-his>
     <homeProducts :datas="metas.products"></homeProducts>
