@@ -21,32 +21,31 @@
 
       <section class="lottery">
         <div class="container">
-          <div class="hist_table twenty">
-            <div class="hist_thead bingoinssu">
+
+          <div class="hist_tr">
+
+            <div class="hist_head">
               <div class="hist_td">期数</div>
               <div class="hist_td">时间</div>
               <div class="hist_td">{{ openSetTitle }}</div>
               <div class="hist_td" v-if="vhId"></div>
             </div>
+
             <loading v-if="loadingStatus" class="wloading"></loading>
-            <template v-if="tableData.length != 0">
+           
+            <template v-if="tableData.length === 0">
               <div
                 class="hist_tr"
                 :class="{ hist_tr_light: id % 2 === 0 }"
                 v-for="(item, id) in displayedPosts"
                 :key="id"
               >
-              <!-- two display way -->
+                <!-- two display way -->
                 <template v-if="checkValue(item.win_code)">
-                  <template>
-                        <div v-if="mobile" class="row" :class="{'row-reverse':false}">
-                            <div class="hist_td">{{ item.official_issue_code }}期</div>
-                            <div class="hist_td">{{ item.official_time }}</div>
-                        </div>
-                        <div v-if="!mobile" class="hist_td">{{ item.official_issue_code }}期</div>
-                        <div v-if="!mobile" class="hist_td">{{ item.official_time }}</div>
-                  </template>          
-                  <div class="hist_td">
+                  <div class="hist_td">{{ item.official_issue_code }}期</div>
+                  <div class="hist_td">{{ item.official_time }}</div>
+
+                  <div class="hist_td hist_td_3">
                     <span
                       v-for="(itm, idx) in item.win_code.split(',')"
                       :key="idx"
@@ -56,7 +55,7 @@
                 </template>
                 <template v-else>
                   <div class="hist_td">{{ item.official_issue_code }}期</div>
-                  <div class="hist_td">{{ item.official_time }}</div>  
+                  <div class="hist_td">{{ item.official_time }}</div>
                   <div class="hist_td">
                     <span
                       v-for="(itm, idx) in item.win_code[0].resultList[0].split(
@@ -83,44 +82,38 @@
               </div>
             </template>
           </div>
-   
 
-         <vue-ads-pagination
-            class="pagination" 
+          <vue-ads-pagination
+            class="pagination"
             :totalItems="tableData.length"
             :items-per-page="10"
             :max-visible-pages="3"
-            :page="page-1"
+            :page="page - 1"
             :loading="loadingStatus"
             @page-change="pageChange"
             @range-change="rangeChange"
-        >
+          >
             <template slot-scope="props">
-                <div class="vue-ads-pr-2 vue-ads-leading-loose">
-                    Items {{ props.start }} - {{ props.end }} : Total {{ props.total }}
-                </div>
+              <div class="vue-ads-pr-2 vue-ads-leading-loose">
+                Items {{ props.start }} - {{ props.end }} : Total
+                {{ props.total }}
+              </div>
             </template>
-            <template
-                slot="buttons"
-                slot-scope="props"
-            >
-                <vue-ads-page-button
-                    v-for="(button, key) in props.buttons"
-                    :key="key"
-                    v-bind="button"
-                    class="page-item"
-                     :class="{'buttonAct': button.active}"
-                    @page-change="page = button.page+1"
-                />
+            <template slot="buttons" slot-scope="props">
+              <vue-ads-page-button
+                v-for="(button, key) in props.buttons"
+                :key="key"
+                v-bind="button"
+                class="page-item"
+                :class="{ buttonAct: button.active }"
+                @page-change="page = button.page + 1"
+              />
             </template>
-        </vue-ads-pagination>
-
+          </vue-ads-pagination>
         </div>
       </section>
 
-       <div class="into_footer">
-           奖源稳定 准确无误
-       </div>
+      <div class="into_footer">奖源稳定 准确无误</div>
 
       <div class="pop" v-if="showPop" @touchmove.prevent>
         <listpop
@@ -141,7 +134,7 @@ import listpop from '../components/listpop'
 import loading from '../components/loading'
 import { NumPost, NavPost, getNowFormatDate } from '../api/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import VueAdsPagination, { VueAdsPageButton } from 'vue-ads-pagination';
+import VueAdsPagination, { VueAdsPageButton } from 'vue-ads-pagination'
 
 export default {
   name: 'lottery',
@@ -154,7 +147,7 @@ export default {
       showPop: false,
       vhId: '',
       popDataList: null,
-      country: '中国',//一级默认数据
+      country: '中国', //一级默认数据
       openSetTitle: '开奖号码',
       lottery: '时时彩', //二级默认数据
       lotteryItem: [], //二级
@@ -229,27 +222,26 @@ export default {
         this.pages.push(i)
       }
     },
-    paginate (tableData) {
-        let page = this.page;
-        let perPage = this.perPage;
-        let from = (page * perPage) - perPage;
-        let to = (page * perPage);
-        console.log('from_to',from,to);
-        return  tableData.slice(from, to);
+    paginate(tableData) {
+      let page = this.page
+      let perPage = this.perPage
+      let from = page * perPage - perPage
+      let to = page * perPage
+      console.log('from_to', from, to)
+      return tableData.slice(from, to)
     },
-    pageChange (page) {
-        this.page = page;
-        console.log('pageChange==>',page);
-    },
-
-    pageChange_2 (buttonPage) {
-        this.page = buttonPage+1; 
-        console.log('buttonPage ==>',buttonPage);
+    pageChange(page) {
+      this.page = page
+      console.log('pageChange==>', page)
     },
 
-    
-    rangeChange (start, end) {
-        console.log('[ rangeChange ]',start, end);
+    pageChange_2(buttonPage) {
+      this.page = buttonPage + 1
+      console.log('buttonPage ==>', buttonPage)
+    },
+
+    rangeChange(start, end) {
+      console.log('[ rangeChange ]', start, end)
     },
     checkValue(value) {
       if (value instanceof Object) {
@@ -277,7 +269,7 @@ export default {
         this.foreigns(this.foreign_t)
       }
     },
-  
+
     //国内彩种列表
     getNavList(n) {
       this.loading = true
@@ -364,21 +356,21 @@ export default {
       'foreign_children',
     ]),
     ...mapGetters(['loadingStatus', 'tableData']),
-    displayedPosts () {
-		return this.paginate(this.tableData);
+    displayedPosts() {
+      return this.paginate(this.tableData)
     },
     mobile() {
-        let fullWidth = 0
-        fullWidth = window.innerWidth;
-        window.onresize = () => {
-          fullWidth = window.innerWidth;
-        }
-        if (fullWidth<=767){
-            return true
-        } else {
-            return false
-        }
-    }
+      let fullWidth = 0
+      fullWidth = window.innerWidth
+      window.onresize = () => {
+        fullWidth = window.innerWidth
+      }
+      if (fullWidth <= 767) {
+        return true
+      } else {
+        return false
+      }
+    },
   },
   mounted() {
     this.init_country()
@@ -394,29 +386,29 @@ export default {
 </script>
 <style lang="scss" scoped>
 .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    height: 44px;
-    background: #0F0F0F;
-   .page-item {
-       padding: 14px;
-       color: #fff;
-       background: transparent;
-       border: transparent;
-       cursor: pointer;
-     .page-link {
-         margin: 13px 19px;
-     }
-   }
-   .buttonAct {
-       color: #F5D978;
-       text-decoration:underline;	
-   }
-   .vue-ads-leading-loose {
-       display: none;
-   }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  height: 44px;
+  background: #0f0f0f;
+  .page-item {
+    padding: 14px;
+    color: #fff;
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
+    .page-link {
+      margin: 13px 19px;
+    }
+  }
+  .buttonAct {
+    color: #f5d978;
+    text-decoration: underline;
+  }
+  .vue-ads-leading-loose {
+    display: none;
+  }
 }
 
 .loto {
@@ -433,19 +425,44 @@ export default {
     padding: 0;
     min-height: 500px;
     .lottery {
-        background: #0F0F0F;
-        width: 990px;
+      background: #0f0f0f;
+      width: 990px;
+      .hist_head {
+        display: flex;
+        width: 100%;
+        color: #f5d978;
+        background: #0f0f0f;
+        //   border-collapse: collapse;
+        .hist_td {
+          flex: 0 0 25%;
+          height: 40px;
+          text-align: center;
+          line-height: 43px;
+          border: none;
+        }
+      }
+      .hist_tr {
+        display: flex;
+        color: #fff;
+        background: #0f0f0f;
+        .hist_td {
+          flex: 0 0 25%;
+        }
+        .hist_td_3 {
+          flex: 0 0 50%;
+        }
+      }
     }
   }
 }
 .into_footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 14px;
-    // line-height: 94px;
-    margin-top: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 14px;
+  // line-height: 94px;
+  margin-top: 34px;
 }
 
 .btn.btn-default:hover {
@@ -459,7 +476,7 @@ export default {
 }
 .btn.btn-default {
   border: none;
-  background: #0F0F0F;
+  background: #0f0f0f;
   color: #fff;
 }
 .pop {
@@ -475,66 +492,15 @@ export default {
     margin: auto;
   }
 }
-.btn-xs,
-.btn-group-xs > .btn {
-  font-size: 12px;
-  line-height: 1.5;
-}
-.row {
-  margin-left: -15px;
-  margin-right: -15px;
-}
-.col-xs-12,
-.col-sm-12,
-.col-md-12 {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.hist_table {
-  display: table;
-  width: 100%;
-  margin-top: 20px;
-  position: relative;
-  .wloading {
-    position: absolute;
-    top: 20px;
-    left: 0;
-    right: 0;
-    margin-top: 50px;
-  }
-}
-.hist_thead {
-  display: table-row;
-  color: #f5d978;
-  background: #0f0f0f;
-  border-collapse: collapse;
-  .hist_td {
-    height: 40px;
-    text-align: center;
-    line-height: 43px;
-    border: none;
-  }
-}
-.hist_tr {
-  display: table-row;
-  color: #fff;
-  background: #0f0f0f;
-  .hist_td {
-    &:nth-child(3) {
-      // border-left: 1px solid #ecf2fd;
-      width: 46%;
-    }
-  }
-}
+
 .hist_tr_light {
   background: #1c1c1c;
 }
 .hist_td {
-  display: table-cell;
+  //   display: table-cell;
   text-align: center;
   vertical-align: middle;
+  //   flex: 0 0 25%;
 
   span {
     display: inline-block;
@@ -553,7 +519,7 @@ export default {
     border: none;
     margin: 0 auto;
     color: #fff;
-    background: #CE9C50;
+    background: #ce9c50;
     outline: none;
     width: 48px;
     height: 26px;
@@ -565,8 +531,8 @@ export default {
   }
 }
 .container {
-       width: 990px !important;
-    }
+  width: 990px !important;
+}
 @media screen and (max-width: 640px) {
   .hist_td {
     &:last-child {
