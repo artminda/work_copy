@@ -92,6 +92,11 @@ export const products_info=[{
     ]
 }]
 
+export const loto={
+    class:'loto',
+    title:'GAME RESULTS',
+    des:'开奖中心', 
+}
 
 // content:'KK彩票拥有成熟的商业模式、精密的数据模型、强大的核心技术，我们对行业现状及发展趋势具有深刻的理解，可以迅速打造各类符合市场趋势、适应市场变化的完善商业链。我们拥有绝对的自主创新能力及敏锐的市场洞察力，致力于为客户量身打造长期可持续性发展的产品。\n' +
 //         '                            <br>\n' +

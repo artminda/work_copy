@@ -1,67 +1,67 @@
 <template>
-    <div>
-        <tp-banner :url="url">
-            <!-- <img src="../assets/img/freeze/text-lottery-tp-banner.png" alt=""> -->
-        </tp-banner>
-        <section class="loto">
-            <div class="container">
-                <select class="btn btn-default btn-xs " v-model="country">
-                    <option v-for="v in countryName" :key="v">{{v}}</option>
-                </select>
-                <span>> </span>
-                <select class="btn btn-default btn-xs " v-model="lottery">
-                    <option v-for="v in lotteryItem" :key="v.id">{{v.name}}</option>
-                </select>
-                <span> > </span>
-                <select v-if="lotteryList" class="btn btn-default btn-xs " v-model="lotteryList">
-                    <option v-for="v in lotteryArr" :key="v.id">{{v.name}}</option>
-                </select>
-                <section class="lottery" style="margin-top: 0px;background-color: white;">
-                    <div class="container">
-                        <div class="hist_table twenty">
-                            <div class="hist_thead bingoinssu">
-                                <div class="hist_td">{{openSetTitle}}</div>
-                                <div class="hist_td">期数</div>
-                                <div class="hist_td">时间</div>
-                                <div class="hist_td" v-if="vhId"></div>
-                            </div>
-                            <loading v-if="loading" class="wloading"></loading>
-                            <template v-if="tableData.length!=0">
-                                <div class="hist_tr" v-for="(item,id) in tableData" :key="id">
-                                    <template v-if="checkValue(item.win_code)">
-                                        <div class="hist_td">
-                                            <span v-for="(itm,idx) in item.win_code.split(',')" :key="idx">{{itm}}</span>
-                                        </div>
-                                        <div class="hist_td">{{item.official_issue_code}}</div>
-                                        <div class="hist_td">{{item.official_time}}</div>
-                                    </template>
-                                    <template v-else>
-                                        <div class="hist_td">
-                                            <span v-for="(itm,idx) in item.win_code[0].resultList[0].split(',')" :key="idx">{{itm}}</span>
-                                        </div>
-                                        <div class="hist_td">{{item.official_issue_code}}</div>
-                                        <div class="hist_td">{{item.official_time}}</div>
-                                        <div class="hist_td" v-if="vhId"><button @click="btnClick(item)" :disabled="loading">详情</button></div>
-                                    </template>
-                                </div>
-                            </template>
-                            <template v-else-if="tableData.length==0&&loading==false">
-                                <div style="position: relative;left: 100%;top: 60px">暂无数据</div>
-                            </template>
+    <section class="loto">
+        <pageTitle :info="loto" :dark="2" :pt="true" />
 
+        <div class="container">
+            <select class="btn btn-default btn-xs " v-model="country">
+                <option v-for="v in countryName" :key="v">{{v}}</option>
+            </select>
+            <span>> </span>
+            <select class="btn btn-default btn-xs " v-model="lottery">
+                <option v-for="v in lotteryItem" :key="v.id">{{v.name}}</option>
+            </select>
+            <span> > </span>
+            <select v-if="lotteryList" class="btn btn-default btn-xs " v-model="lotteryList">
+                <option v-for="v in lotteryArr" :key="v.id">{{v.name}}</option>
+            </select>
+            <section class="lottery" style="margin-top: 0px;background-color: white;">
+                <div class="container">
+                    <div class="hist_table twenty">
+                        <div class="hist_thead bingoinssu">
+                            <div class="hist_td">期数</div>
+                            <div class="hist_td">时间</div>
+                            <div class="hist_td">{{openSetTitle}}</div>
+                            <div class="hist_td" v-if="vhId"></div>
                         </div>
-                    </div>
-                </section>
-                <div class="pop" v-if="showPop" @touchmove.prevent>
-                    <listpop class="listpop" @closeBtn="closeBtn" :lotteryList="popDataList" :vhId="vhId"></listpop>
-                </div>
-            </div>
-        </section>
-    </div>
-</template>
-<script>
+                        <loading v-if="loading" class="wloading"></loading>
+                        <template v-if="tableData.length!=0">
+                            <div class="hist_tr" v-for="(item,id) in tableData" :key="id"> 
+                                <template v-if="checkValue(item.win_code)">
 
-    import tpBanner from '../components/top-banner'
+                                    <div class="hist_td">{{item.official_issue_code}}期</div>
+                                    <div class="hist_td">{{item.official_time}}</div>
+                                    <div class="hist_td">
+                                        <span v-for="(itm,idx) in item.win_code.split(',')" :key="idx">{{itm}}</span>
+                                    </div>
+                                   
+                                </template>
+                                <template v-else>
+                                    <div class="hist_td">
+                                        <span v-for="(itm,idx) in item.win_code[0].resultList[0].split(',')" :key="idx">{{itm}}</span>
+                                    </div>
+                                    <div class="hist_td">{{item.official_issue_code}}期</div>
+                                    <div class="hist_td">{{item.official_time}}</div>
+                                    <div class="hist_td" v-if="vhId"><button @click="btnClick(item)" :disabled="loading">详情</button></div>
+                                </template>
+                            </div>
+                        </template>
+                        <template v-else-if="tableData.length==0&&loading==false">
+                            <div style="position: relative;left: 100%;top: 60px">暂无数据</div>
+                        </template>
+
+                    </div>
+                </div>
+            </section>
+            <div class="pop" v-if="showPop" @touchmove.prevent>
+                <listpop class="listpop" @closeBtn="closeBtn" :lotteryList="popDataList" :vhId="vhId"></listpop>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script>
+    import {loto} from '../libs/metas'
+    import pageTitle from '../components/page-title'
     import listpop from '../components/listpop'
     import loading from '../components/loading'
     import {NumPost,NavPost,getNowFormatDate} from '../api/index'
@@ -69,6 +69,7 @@
         name: 'lottery',
         data() {
             return {
+                loto,
                 loading:false,
                 showPop: false,
                 vhId:'',
@@ -279,8 +280,9 @@
             this.init_country();
         },
         components: {
-            tpBanner,
-            listpop,loading
+            listpop,
+            loading,
+            pageTitle
         }
     }
 </script>
@@ -290,7 +292,10 @@
         padding-bottom: 90px;
     }
     .loto {
-        padding: 30px 0;
+        padding-top: 75px;
+        background: url(../assets/img/freeze/bg-loto.jpg) no-repeat;
+        background-size: cover;
+        font-size: 12px;
 
         span {
             margin: 0 5px;
@@ -299,6 +304,9 @@
         .container {
             padding: 0;
             min-height: 500px;
+            .lottery {
+
+            }
         }
     }
     .btn.btn-default:hover {
@@ -361,39 +369,41 @@
     }
     .hist_thead {
         display: table-row;
-        background: #d3954c;
+        color: #F5D978;
+        background: #0F0F0F;
         border-collapse:collapse;
         .hist_td {
             height: 40px;
             text-align: center;
-            line-height: 40px;
-            color: #fff;
+            line-height: 43px;
             border: none;
         }
     }
     .hist_tr {
         display: table-row;
-        background: #fff;
+        background: #0F0F0F;
         .hist_td{
             &:first-child {
-                border-left: 1px solid #ecf2fd;
+                // border-left: 1px solid #ecf2fd;
                 width: 46%;
-            }
+            } 
         }
     }
     .hist_td {
         display: table-cell;
         text-align: center;
         vertical-align: middle;
-        border-bottom: 1px solid #ecf2fd;
-        border-right: 1px solid #ecf2fd;
+        // border-bottom: 1px solid #ecf2fd;
+        // border-right: 1px solid #ecf2fd;
         span {
             display: inline-block;
-            background: url(../assets/img/freeze/his_ball.png);
+            // background: url(../assets/img/freeze/his_ball.png);
+            border: 1px solid #F5D978;
+            border-radius: 50%;
             width: 42px;
             height: 42px;
             line-height: 42px;
-            color: #d3954c;
+            color: #F5D978;
             margin: 5px;
         }
         button{

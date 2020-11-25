@@ -10,7 +10,6 @@
             <img src="../assets/img/freeze/logo.png" class="logo hidden-xs" />
             <img src="../assets/img/freeze/logo-m.png" class="logo visible-xs" />
           </router-link>
-          {{flag}}
           <button type="button" class="navbar-toggle" @click="toggle">
             <span class="fa fa-bars fa-lg"></span>
           </button>
