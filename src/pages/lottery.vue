@@ -19,7 +19,7 @@
         <option v-for="v in lotteryArr" :key="v.id">{{ v.name }}</option>
       </select>
 
-      <section class="lottery" style="margin-top: 0px; background-color: white">
+      <section class="lottery">
         <div class="container">
           <div class="hist_table twenty">
             <div class="hist_thead bingoinssu">
@@ -30,10 +30,22 @@
             </div>
             <loading v-if="loadingStatus" class="wloading"></loading>
             <template v-if="tableData.length != 0">
-              <div class="hist_tr" :class="{'hist_tr_light':(id%2)===0}" v-for="(item, id) in tableData" :key="id">
+              <div
+                class="hist_tr"
+                :class="{ hist_tr_light: id % 2 === 0 }"
+                v-for="(item, id) in displayedPosts"
+                :key="id"
+              >
+              <!-- two display way -->
                 <template v-if="checkValue(item.win_code)">
-                  <div class="hist_td">{{ item.official_issue_code }}期</div>
-                  <div class="hist_td">{{ item.official_time }}</div>
+                  <template>
+                        <div v-if="mobile" class="row" :class="{'row-reverse':false}">
+                            <div class="hist_td">{{ item.official_issue_code }}期</div>
+                            <div class="hist_td">{{ item.official_time }}</div>
+                        </div>
+                        <div v-if="!mobile" class="hist_td">{{ item.official_issue_code }}期</div>
+                        <div v-if="!mobile" class="hist_td">{{ item.official_time }}</div>
+                  </template>          
                   <div class="hist_td">
                     <span
                       v-for="(itm, idx) in item.win_code.split(',')"
@@ -43,6 +55,8 @@
                   </div>
                 </template>
                 <template v-else>
+                  <div class="hist_td">{{ item.official_issue_code }}期</div>
+                  <div class="hist_td">{{ item.official_time }}</div>  
                   <div class="hist_td">
                     <span
                       v-for="(itm, idx) in item.win_code[0].resultList[0].split(
@@ -52,14 +66,13 @@
                       >{{ itm }}</span
                     >
                   </div>
-                  <div class="hist_td">{{ item.official_issue_code }}期</div>
-                  <div class="hist_td">{{ item.official_time }}</div>
                   <div class="hist_td" v-if="vhId">
                     <button @click="btnClick(item)" :disabled="loadingStatus">
                       详情
                     </button>
                   </div>
                 </template>
+                <!-- two display way -->
               </div>
             </template>
             <template
@@ -70,8 +83,45 @@
               </div>
             </template>
           </div>
+   
+
+         <vue-ads-pagination
+            class="pagination" 
+            :totalItems="tableData.length"
+            :items-per-page="10"
+            :max-visible-pages="3"
+            :page="page-1"
+            :loading="loadingStatus"
+            @page-change="pageChange"
+            @range-change="rangeChange"
+        >
+            <template slot-scope="props">
+                <div class="vue-ads-pr-2 vue-ads-leading-loose">
+                    Items {{ props.start }} - {{ props.end }} : Total {{ props.total }}
+                </div>
+            </template>
+            <template
+                slot="buttons"
+                slot-scope="props"
+            >
+                <vue-ads-page-button
+                    v-for="(button, key) in props.buttons"
+                    :key="key"
+                    v-bind="button"
+                    class="page-item"
+                     :class="{'buttonAct': button.active}"
+                    @page-change="page = button.page+1"
+                />
+            </template>
+        </vue-ads-pagination>
+
         </div>
       </section>
+
+       <div class="into_footer">
+           奖源稳定 准确无误
+       </div>
+
       <div class="pop" v-if="showPop" @touchmove.prevent>
         <listpop
           class="listpop"
@@ -91,15 +141,20 @@ import listpop from '../components/listpop'
 import loading from '../components/loading'
 import { NumPost, NavPost, getNowFormatDate } from '../api/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import VueAdsPagination, { VueAdsPageButton } from 'vue-ads-pagination';
+
 export default {
   name: 'lottery',
   data() {
     return {
       loto,
-    //   loadingStatus: this.$store.state.loadingStatus,
+      page: 1,
+      perPage: 10,
+      pages: [],
       showPop: false,
       vhId: '',
       popDataList: null,
+      country: '中国',//一级默认数据
       openSetTitle: '开奖号码',
       lottery: '时时彩', //二级默认数据
       lotteryItem: [], //二级
@@ -108,7 +163,12 @@ export default {
     }
   },
   watch: {
-    country: function () {
+    tableData(v1, v2) {
+      if (v1) {
+        this.setPages()
+      }
+    },
+    country() {
       this.init_country()
     },
     lottery: function (value) {
@@ -163,6 +223,34 @@ export default {
   },
   methods: {
     ...mapActions(['gitNumPost']),
+    setPages() {
+      let numberOfPages = Math.ceil(this.tableData.length / this.perPage)
+      for (let i = 1; i <= numberOfPages; i++) {
+        this.pages.push(i)
+      }
+    },
+    paginate (tableData) {
+        let page = this.page;
+        let perPage = this.perPage;
+        let from = (page * perPage) - perPage;
+        let to = (page * perPage);
+        console.log('from_to',from,to);
+        return  tableData.slice(from, to);
+    },
+    pageChange (page) {
+        this.page = page;
+        console.log('pageChange==>',page);
+    },
+
+    pageChange_2 (buttonPage) {
+        this.page = buttonPage+1; 
+        console.log('buttonPage ==>',buttonPage);
+    },
+
+    
+    rangeChange (start, end) {
+        console.log('[ rangeChange ]',start, end);
+    },
     checkValue(value) {
       if (value instanceof Object) {
         return false
@@ -189,6 +277,7 @@ export default {
         this.foreigns(this.foreign_t)
       }
     },
+  
     //国内彩种列表
     getNavList(n) {
       this.loading = true
@@ -269,16 +358,27 @@ export default {
   },
   computed: {
     ...mapState([
-      'country',
       'countryName',
       'official_classify',
       'foreign_t',
       'foreign_children',
     ]),
-    ...mapGetters([
-       'loadingStatus',
-       'tableData'
-    ]),
+    ...mapGetters(['loadingStatus', 'tableData']),
+    displayedPosts () {
+		return this.paginate(this.tableData);
+    },
+    mobile() {
+        let fullWidth = 0
+        fullWidth = window.innerWidth;
+        window.onresize = () => {
+          fullWidth = window.innerWidth;
+        }
+        if (fullWidth<=767){
+            return true
+        } else {
+            return false
+        }
+    }
   },
   mounted() {
     this.init_country()
@@ -287,16 +387,40 @@ export default {
     listpop,
     loading,
     pageTitle,
+    VueAdsPagination,
+    VueAdsPageButton,
   },
 }
 </script>
 <style lang="scss" scoped>
-section {
-  position: relative;
-  padding-bottom: 90px;
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    height: 44px;
+    background: #0F0F0F;
+   .page-item {
+       padding: 14px;
+       color: #fff;
+       background: transparent;
+       border: transparent;
+       cursor: pointer;
+     .page-link {
+         margin: 13px 19px;
+     }
+   }
+   .buttonAct {
+       color: #F5D978;
+       text-decoration:underline;	
+   }
+   .vue-ads-leading-loose {
+       display: none;
+   }
 }
+
 .loto {
-  padding-top: 75px;
+  padding: 37px 0;
   background: url(../assets/img/freeze/bg-loto.jpg) no-repeat;
   background-size: cover;
   font-size: 12px;
@@ -309,24 +433,34 @@ section {
     padding: 0;
     min-height: 500px;
     .lottery {
+        background: #0F0F0F;
+        width: 990px;
     }
   }
 }
+.into_footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 14px;
+    // line-height: 94px;
+    margin-top: 34px;
+}
+
 .btn.btn-default:hover {
-  color: #336799;
+  color: #fff;
 }
 .btn {
-  border-radius: 3em;
+  border-radius: 5px;
   box-shadow: none;
-  padding: 5px 14px;
+  padding: 7px 10px;
   cursor: pointer;
 }
 .btn.btn-default {
   border: none;
-  background: #ffffff;
-  background: linear-gradient(180deg, #ffffff 0%, #cccccc 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#cccccc, GradientType=1);
-  color: #336799;
+  background: #0F0F0F;
+  color: #fff;
 }
 .pop {
   position: fixed;
@@ -388,21 +522,20 @@ section {
   color: #fff;
   background: #0f0f0f;
   .hist_td {
-    &:last-child {
+    &:nth-child(3) {
       // border-left: 1px solid #ecf2fd;
       width: 46%;
     }
   }
 }
 .hist_tr_light {
-  background: #1C1C1C;  
+  background: #1c1c1c;
 }
 .hist_td {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-  // border-bottom: 1px solid #ecf2fd;
-  // border-right: 1px solid #ecf2fd;
+
   span {
     display: inline-block;
     font-weight: 500;
@@ -420,16 +553,20 @@ section {
     border: none;
     margin: 0 auto;
     color: #fff;
-    background: #b47f41;
+    background: #CE9C50;
     outline: none;
-    width: 36px;
+    width: 48px;
+    height: 26px;
     font-size: 12px;
     margin: 0 5px;
     padding: 5px;
-    border-radius: 2px;
+    border-radius: 5px;
     cursor: pointer;
   }
 }
+.container {
+       width: 990px !important;
+    }
 @media screen and (max-width: 640px) {
   .hist_td {
     &:last-child {

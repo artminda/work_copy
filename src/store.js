@@ -8,7 +8,6 @@ export default new Vuex.Store({
   state: {
     loadingStatus: false,
     tableData: [],
-    country: '中国',//一级默认数据
     countryName: ['中国', '外国'],//一级
     official_classify: [
       { name: '时时彩', id: 1 },
