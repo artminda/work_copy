@@ -1,0 +1,189 @@
+.loto {
+    padding: 37px 0;
+    background: url(../assets/img/freeze/bg-loto.jpg) no-repeat;
+    background-size: cover;
+    font-size: 12px;
+  
+    .container {
+      max-width: 990px;
+      padding: 0;
+      min-height: 500px;
+      .lottery-container {
+        background: #0f0f0f;
+        height: 607px;
+        width: 100%;
+        position: relative;
+        .hist_box {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: row;
+          margin: 24px 0;
+          color: #fff;
+          background: #0f0f0f;
+          .text-y {
+            color: #f5d978;
+          }
+          .hist_inline-flex {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 100%;
+            height: 52px;
+            background: #0f0f0f;
+            .hist_td {
+              flex: 0 0 27%;
+              text-align: center;
+              line-height: 43px;
+              span {
+                display: inline-block;
+                font-weight: 500;
+                font-size: 18px;
+                letter-spacing: 0px;
+                border: 1px solid #f5d978;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                color: #f5d978;
+                margin: 11px 5px;
+              }
+              button {
+                border: none;
+                margin: 0 auto;
+                color: #fff;
+                background: #ce9c50;
+                outline: none;
+                width: 48px;
+                height: 26px;
+                font-size: 12px;
+                margin: 0 5px;
+                padding: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+              }
+            }
+            :nth-child(3) {
+              flex: 0 0 46%;
+            }
+          }
+          .hist_light {
+            background: #1c1c1c;
+          }
+        }
+        .pagination {
+          position: absolute;
+          width: 100%;
+          margin: 0 auto;
+          bottom: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 12px;
+          height: 44px;
+          background: #0f0f0f;
+          .page-item {
+            padding: 14px;
+            color: #fff;
+            background: transparent;
+            border: transparent;
+            cursor: pointer;
+          }
+          .buttonAct {
+            color: #f5d978;
+            text-decoration: underline;
+          }
+          .vue-ads-leading-loose {
+            display: none;
+          }
+        }
+      }
+      .into_footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 14px;
+        margin-top: 34px;
+      }
+    }
+  }
+  
+  .btn.btn-default:hover {
+    color: #fff;
+  }
+  .btn {
+    border-radius: 5px;
+    box-shadow: none;
+    padding: 7px 10px;
+    cursor: pointer;
+  }
+  .btn.btn-default {
+    border: none;
+    background: #0f0f0f;
+    color: #fff;
+  }
+  .pop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 80px;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    .listpop {
+      margin: auto;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .loto .container {
+      .lottery-container {
+        height: auto;
+        .hist_box {
+          .hist_inline-flex {
+            flex-wrap: wrap;
+            height: auto ;
+            .hist_td {
+              flex: 0 0 50% ;
+              padding: 0 9px;
+              span {
+                width: 48px;
+                height: 48px;
+                line-height: 48px;
+                font-size: 27px;
+                text-align: center;
+                margin: 20px 4px;
+              }
+              button {
+              }
+            }
+            :nth-child(1) {
+              text-align: left;
+            }
+            :nth-child(2) {
+              text-align: right;
+            }
+            :nth-child(3) {
+              flex: 0 0 100%;
+            }
+          }
+          .hist_light {
+            background: #1c1c1c;
+          }
+          .t-head {
+            display: none ;
+          }
+        }
+        .pagination {
+           position: relative;
+           bottom: 0;
+           height: auto;
+           font-size: 18px;
+           .page-item {
+            padding: 14px 10px;
+          }
+        } 
+      }
+    }
+  }
