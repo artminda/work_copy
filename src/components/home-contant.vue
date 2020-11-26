@@ -96,6 +96,7 @@ export default {
 
  @media (max-width: 640px){
    .contant {
+     padding: 43px 0 66px 0;
      .container {
        padding-top: 47px;
      .iconBox{

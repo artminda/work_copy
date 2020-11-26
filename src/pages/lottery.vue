@@ -19,98 +19,92 @@
         <option v-for="v in lotteryArr" :key="v.id">{{ v.name }}</option>
       </select>
 
-      <section class="lottery">
-        <div class="container">
-
-          <div class="hist_tr">
-
-            <div class="hist_head">
-              <div class="hist_td">期数</div>
-              <div class="hist_td">时间</div>
-              <div class="hist_td">{{ openSetTitle }}</div>
-              <div class="hist_td" v-if="vhId"></div>
-            </div>
-
-            <loading v-if="loadingStatus" class="wloading"></loading>
-           
-            <template v-if="tableData.length === 0">
-              <div
-                class="hist_tr"
-                :class="{ hist_tr_light: id % 2 === 0 }"
-                v-for="(item, id) in displayedPosts"
-                :key="id"
-              >
-                <!-- two display way -->
-                <template v-if="checkValue(item.win_code)">
-                  <div class="hist_td">{{ item.official_issue_code }}期</div>
-                  <div class="hist_td">{{ item.official_time }}</div>
-
-                  <div class="hist_td hist_td_3">
-                    <span
-                      v-for="(itm, idx) in item.win_code.split(',')"
-                      :key="idx"
-                      >{{ itm }}</span
-                    >
-                  </div>
-                </template>
-                <template v-else>
-                  <div class="hist_td">{{ item.official_issue_code }}期</div>
-                  <div class="hist_td">{{ item.official_time }}</div>
-                  <div class="hist_td">
-                    <span
-                      v-for="(itm, idx) in item.win_code[0].resultList[0].split(
-                        ','
-                      )"
-                      :key="idx"
-                      >{{ itm }}</span
-                    >
-                  </div>
-                  <div class="hist_td" v-if="vhId">
-                    <button @click="btnClick(item)" :disabled="loadingStatus">
-                      详情
-                    </button>
-                  </div>
-                </template>
-                <!-- two display way -->
-              </div>
-            </template>
-            <template
-              v-else-if="tableData.length == 0 && loadingStatus == false"
-            >
-              <div style="position: relative; left: 100%; top: 60px">
-                暂无数据
-              </div>
-            </template>
+      <section class="lottery-container">
+        <div class="hist_box">
+          <div class="hist_inline-flex text-y t-head">
+            <div class="hist_td">期数</div>
+            <div class="hist_td">时间</div>
+            <div class="hist_td">{{ openSetTitle }}</div>
+            <div class="hist_td" v-if="vhId"></div>
           </div>
 
-          <vue-ads-pagination
-            class="pagination"
-            :totalItems="tableData.length"
-            :items-per-page="10"
-            :max-visible-pages="3"
-            :page="page - 1"
-            :loading="loadingStatus"
-            @page-change="pageChange"
-            @range-change="rangeChange"
-          >
-            <template slot-scope="props">
-              <div class="vue-ads-pr-2 vue-ads-leading-loose">
-                Items {{ props.start }} - {{ props.end }} : Total
-                {{ props.total }}
-              </div>
-            </template>
-            <template slot="buttons" slot-scope="props">
-              <vue-ads-page-button
-                v-for="(button, key) in props.buttons"
-                :key="key"
-                v-bind="button"
-                class="page-item"
-                :class="{ buttonAct: button.active }"
-                @page-change="page = button.page + 1"
-              />
-            </template>
-          </vue-ads-pagination>
+          <loading v-if="loadingStatus" class="wloading"></loading>
+
+          <template v-if="tableData.length !== 0">
+            <div
+              class="hist_inline-flex"
+              :class="{ hist_light: id % 2 === 0 }"
+              v-for="(item, id) in displayedPosts"
+              :key="id"
+            >
+              <!-- two display way -->
+              <template v-if="checkValue(item.win_code)">
+                <div class="hist_td">{{ item.official_issue_code }}期</div>
+                <div class="hist_td">{{ item.official_time }}</div>
+
+                <div class="hist_td hist_td_3">
+                  <span
+                    v-for="(itm, idx) in item.win_code.split(',')"
+                    :key="idx"
+                    >{{ itm }}</span
+                  >
+                </div>
+              </template>
+              <template v-else>
+                <div class="hist_td">{{ item.official_issue_code }}期</div>
+                <div class="hist_td">{{ item.official_time }}</div>
+                <div class="hist_td">
+                  <span
+                    v-for="(itm, idx) in item.win_code[0].resultList[0].split(
+                      ','
+                    )"
+                    :key="idx"
+                    >{{ itm }}</span
+                  >
+                </div>
+                <div class="hist_td" v-if="vhId">
+                  <button @click="btnClick(item)" :disabled="loadingStatus">
+                    详情
+                  </button>
+                </div>
+              </template>
+              <!-- two display way -->
+            </div>
+          </template>
+          <template v-else-if="tableData.length == 0 && loadingStatus == false">
+            <div style="position: relative; left: 100%; top: 60px">
+              暂无数据
+            </div>
+          </template>
         </div>
+
+        <vue-ads-pagination
+          class="pagination"
+          :totalItems="tableData.length"
+          :items-per-page="10"
+          :max-visible-pages="3"
+          :page="page - 1"
+          :loading="loadingStatus"
+          @page-change="pageChange"
+          @range-change="rangeChange"
+        >
+          <template slot-scope="props">
+            <div class="vue-ads-pr-2 vue-ads-leading-loose">
+              Items {{ props.start }} - {{ props.end }} : Total
+              {{ props.total }}
+            </div>
+          </template>
+          <template slot="buttons" slot-scope="props">
+            <vue-ads-page-button
+              v-for="(button, key) in props.buttons"
+              :key="key"
+              v-bind="button"
+              class="page-item"
+              :class="{ buttonAct: button.active }"
+              @page-change="page = button.page + 1"
+            />
+          </template>
+        </vue-ads-pagination>
       </section>
 
       <div class="into_footer">奖源稳定 准确无误</div>
@@ -385,84 +379,114 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  height: 44px;
-  background: #0f0f0f;
-  .page-item {
-    padding: 14px;
-    color: #fff;
-    background: transparent;
-    border: transparent;
-    cursor: pointer;
-    .page-link {
-      margin: 13px 19px;
-    }
-  }
-  .buttonAct {
-    color: #f5d978;
-    text-decoration: underline;
-  }
-  .vue-ads-leading-loose {
-    display: none;
-  }
-}
-
 .loto {
   padding: 37px 0;
   background: url(../assets/img/freeze/bg-loto.jpg) no-repeat;
   background-size: cover;
   font-size: 12px;
 
-  span {
-    margin: 0 5px;
-  }
-
   .container {
+    max-width: 990px;
     padding: 0;
     min-height: 500px;
-    .lottery {
+    .lottery-container {
       background: #0f0f0f;
-      width: 990px;
-      .hist_head {
+      height: 607px;
+      width: 100%;
+      position: relative;
+      .hist_box {
         display: flex;
-        width: 100%;
-        color: #f5d978;
-        background: #0f0f0f;
-        //   border-collapse: collapse;
-        .hist_td {
-          flex: 0 0 25%;
-          height: 40px;
-          text-align: center;
-          line-height: 43px;
-          border: none;
-        }
-      }
-      .hist_tr {
-        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin: 24px 0;
         color: #fff;
         background: #0f0f0f;
-        .hist_td {
-          flex: 0 0 25%;
+        .text-y {
+          color: #f5d978;
         }
-        .hist_td_3 {
-          flex: 0 0 50%;
+        .hist_inline-flex {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          width: 100%;
+          height: 52px;
+          background: #0f0f0f;
+          .hist_td {
+            flex: 0 0 27%;
+            text-align: center;
+            line-height: 43px;
+            span {
+              display: inline-block;
+              font-weight: 500;
+              font-size: 18px;
+              letter-spacing: 0px;
+              border: 1px solid #f5d978;
+              border-radius: 50%;
+              width: 30px;
+              height: 30px;
+              line-height: 30px;
+              color: #f5d978;
+              margin: 11px 5px;
+            }
+            button {
+              border: none;
+              margin: 0 auto;
+              color: #fff;
+              background: #ce9c50;
+              outline: none;
+              width: 48px;
+              height: 26px;
+              font-size: 12px;
+              margin: 0 5px;
+              padding: 5px;
+              border-radius: 5px;
+              cursor: pointer;
+            }
+          }
+          :nth-child(3) {
+            flex: 0 0 46%;
+          }
+        }
+        .hist_light {
+          background: #1c1c1c;
+        }
+      }
+      .pagination {
+        position: absolute;
+        width: 100%;
+        margin: 0 auto;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        height: 44px;
+        background: #0f0f0f;
+        .page-item {
+          padding: 14px;
+          color: #fff;
+          background: transparent;
+          border: transparent;
+          cursor: pointer;
+        }
+        .buttonAct {
+          color: #f5d978;
+          text-decoration: underline;
+        }
+        .vue-ads-leading-loose {
+          display: none;
         }
       }
     }
+    .into_footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 14px;
+      margin-top: 34px;
+    }
   }
-}
-.into_footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 14px;
-  // line-height: 94px;
-  margin-top: 34px;
 }
 
 .btn.btn-default:hover {
@@ -493,62 +517,56 @@ export default {
   }
 }
 
-.hist_tr_light {
-  background: #1c1c1c;
-}
-.hist_td {
-  //   display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-  //   flex: 0 0 25%;
+@media screen and (max-width: 767px) {
+  .loto .container {
+    .lottery-container {
+      height: auto;
+      .hist_box {
+        .hist_inline-flex {
+          flex-wrap: wrap;
+          height: auto ;
+          .hist_td {
+            flex: 0 0 50% ;
+            padding: 0 9px;
+            span {
+              width: 48px;
+              height: 48px;
+              line-height: 48px;
+              font-size: 27px;
+              text-align: center;
+              margin: 20px 4px;
+            }
+            button {
+            }
+          }
+          :nth-child(1) {
+            text-align: left;
+          }
+          :nth-child(2) {
+            text-align: right;
+          }
+          :nth-child(3) {
+            flex: 0 0 100%;
+          }
+        }
+        .hist_light {
+          background: #1c1c1c;
+        }
+        .t-head {
+          display: none ;
+        }
+      }
+      .pagination {
+         position: relative;
+         bottom: 0;
+         height: auto;
+         font-size: 18px;
+         .page-item {
+          padding: 14px 10px;
+        }
+      } 
+    }
+  }
 
-  span {
-    display: inline-block;
-    font-weight: 500;
-    font-size: 18px;
-    letter-spacing: 0px;
-    border: 1px solid #f5d978;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    color: #f5d978;
-    margin: 11px 5px;
-  }
-  button {
-    border: none;
-    margin: 0 auto;
-    color: #fff;
-    background: #ce9c50;
-    outline: none;
-    width: 48px;
-    height: 26px;
-    font-size: 12px;
-    margin: 0 5px;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-}
-.container {
-  width: 990px !important;
-}
-@media screen and (max-width: 640px) {
-  .hist_td {
-    &:last-child {
-      width: auto;
-    }
-    &:first-child {
-      width: 40%;
-    }
-    span {
-      width: 25px;
-      height: 25px;
-      background: url(../assets/img/freeze/his_ball_s.png) no-repeat center;
-      background-size: 100% 100%;
-      line-height: 25px;
-      margin: 2px 1px;
-    }
-  }
 }
 </style>

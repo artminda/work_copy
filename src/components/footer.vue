@@ -9,6 +9,9 @@
 <style lang="scss" scoped>
 
  footer{
+     position: relative;
+     bottom: 0;
+     width: 100%;
      text-align: center;
      background: #0f0906;
      height: 182px;

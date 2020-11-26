@@ -1,7 +1,19 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900);
 
+html, body{
+    height: 100%
+}
+
 body {
+    font-family: "Noto Sans SC", Arial, "Microsoft Sans Serif", "Microsoft YaHei UI";
+    color: #666666;
     background: #0f0f0f;
+    font-size: 14px;
+}
+
+#app {
+    position: relative;
+    min-height: 100%;
 }
 
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
@@ -70,11 +82,6 @@ table {
     border-spacing: 0;
 }
 
-body {
-    font-family: "Noto Sans SC", Arial, "Microsoft Sans Serif", "Microsoft YaHei UI";
-    color: #666666;
-    // -webkit-font-smoothing: antialiased;
-}
 
 a {
     font-family: "Noto Sans SC", Arial, "Microsoft Sans Serif", "Microsoft YaHei UI";
@@ -109,6 +116,23 @@ h6,
     margin-left: auto;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
 }
 
 .row {
