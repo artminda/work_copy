@@ -10,9 +10,9 @@
             <img src="../assets/img/freeze/logo.png" class="logo hidden-xs" />
             <img src="../assets/img/freeze/logo-m.png" class="logo visible-xs" />
           </router-link>
-          <button type="button" class="navbar-toggle" @click="toggle">
-            <span class="fa fa-bars fa-lg"></span>
-          </button>
+          <div class="menu-wrapper visible-xs">
+            <div @click="flag = !flag" class="hamburger-menu" :class="{'animate':flag}" />
+          </div>
         </div>
         <!-- pc -->
         <div class="collapse">
@@ -58,7 +58,7 @@ export default {
     }
   },
   components: {
-    sBtn,
+    sBtn
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll)
@@ -113,6 +113,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import "@/assets/css/menuBtn.scss";
 .header {
   position: fixed;
   top: 0;
@@ -224,10 +225,6 @@ export default {
   .logo {
     max-width: 180px;
   }
-  .navbar-toggle {
-    display: none;
-    cursor: pointer;
-  }
 }
 .header .navbar-default.scrolled {
   // background: rgba(255, 255, 255, 0.8);
@@ -324,19 +321,6 @@ export default {
       justify-content: space-between;
       align-items: center;
       a {padding: 15px 20px;}
-      .navbar-toggle {
-        display: inline-block;
-        height: 50%;
-        padding: 10px;
-        background-color: #ccc;
-        border: 1px solid #fff;
-        &:hover {
-          background-color: #dddddd;
-        }
-        .fa-lg {
-          color: #666;
-        }
-      }
     }
   }
   .nav a li {
@@ -381,15 +365,6 @@ export default {
   }
   .navbar-default.scrolled .collapse .nav.navbar-nav {
     background: #1C1C1C;
-  }
-  .navbar-toggle {
-    border-radius: 50%;
-    border: 2px solid transparent !important;
-    color: #b47f41;
-    background: none !important;
-    .fa-lg {
-      color: #b47f41 !important;
-    }
   }
   .navbar-collapse {
     text-align: center;

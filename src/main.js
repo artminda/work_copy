@@ -6,11 +6,15 @@ import axios from 'axios'
 import animated from './util/animated'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import VueScrollTo from 'vue-scrollto'
+import vSelect from 'vue-select'
+import "vue-select/src/scss/vue-select.scss";
 import './plugins/axios'
 import './assets/css/animate.css'
 import './assets/css/font-awesome.min.css'
 import './permission'
 
+
+Vue.component('v-select', vSelect)
 Vue.use(VueScrollTo, { debounce: 600 });
 Vue.use(animated,VueAwesomeSwiper)
 
