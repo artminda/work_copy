@@ -8,13 +8,14 @@
             v-animated="{ className: 'fadeInDown' }"
           >
             <div class="logoBox">
-              <!-- <img src="../assets/img/freeze/rainbow.png" class="back" /> -->
               <img src="../assets/img/freeze/logo_rainbow.png" class="logo"/>
-            </div>  
-            <h3>十年老牌胜券在握</h3>
-            <p>
-              行业顶尖的性能、安全解决专家，致力于为全球博弈企业提供专业、稳定、高效的技术解决方案。
-            </p>
+              <div class="text">
+                <h3>十年老牌胜券在握</h3>
+                <p>
+                    行业顶尖的性能、安全解决专家，致力于为全球博弈企业提供专业、稳定、高效的技术解决方案。
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -92,30 +93,31 @@ export default {
       line-height: 34.75px;
       color: #fff;
       .logoBox {
+        position: relative;
         display: flex;
-        white-space: nowrap;
-        // width: 837px;
-        height: 321px;
+        flex-direction: column;
+        width: 100%;
+        height: 700px;
         justify-content: center;
         align-items: center;
         .logo {
           width: 1000px;
-          position: relative;
         }
-      }
-      p {
-        position: relative;
-        top:-40px;
-        width: 360px;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 20.27px;
-        margin: 20px auto;
-      }
-      h3 {
-        position: relative;
-        top:-40px;
-        color: #fff;
+        .text {
+            position: relative;
+            bottom: 20%;
+            h3 {
+                width: 100%;      
+                color: #fff;
+            }
+            p {
+                width: 360px;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 20.27px;
+                margin: 20px auto;
+            }
+        }
       }
     }
   }
@@ -127,25 +129,22 @@ export default {
       .tp-banner {
           .tp-caption {
             .logoBox {
+              height: 80vh;  
               overflow: hidden;
               .logo {
-                width: 650px ;  
+                width: 650px ;
+                top: 0;
               }
-          }
-          p {
-            max-width: 326px;
-            padding: 0 15px;
+              .text {
+                  bottom: 15%;
+              p {
+                 width: 100vw; 
+                 padding: 0 15px;
+              }
+            }
           }
         }
     }
   }
 }
-
-//  p {
-//         width: 100%;
-//         padding: 0 15px;
-//       }
-//       img {
-//         width: 312px;
-//       }
 </style>
