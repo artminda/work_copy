@@ -1,12 +1,12 @@
 <template>
   <section class="loto">
-    <pageTitle :info="loto" :dark="2" :pt="true" />
+    <pageTitle :info="loto" :dark="2" :pt="true" :class="{'blur':showPop}" />
 
     <div class="container">
 
-      <contro />
+      <contro :class="{'blur':showPop}" />
 
-      <section class="lottery-container">
+      <section class="lottery-container" :class="{'blur':showPop}">
         <div class="hist_box">
           <div class="hist_inline-flex text-y t-head">
             <div class="hist_td">期数</div>
@@ -38,19 +38,27 @@
                 </div>
               </template>
               <template v-else>
-                <div class="hist_td td-l">{{ item.official_issue_code }}期</div>
-                <div class="hist_td td-r">{{ item.official_time }}</div>
-                <div class="hist_td td-b">
-                  <span
-                    v-for="(itm, idx) in item.win_code[0].resultList[0].split(
-                      ','
-                    )"
-                    :key="idx"
-                    >{{ itm }}
-                    </span>
-                    <button v-if="vhId" @click="btnClick(item)" :disabled="loadingStatus">
-                    详情
-                  </button>
+                <div @click="btnClick_mobile(item)" class="accordion">
+                  <div class="hist_td td-l">{{ item.official_issue_code }}期</div>
+                  <div class="hist_td td-r">{{ item.official_time }}</div>
+                  <div class="hist_td td-b">
+                    <span
+                      v-for="(itm, idx) in item.win_code[0].resultList[0].split(
+                        ','
+                      )"
+                      :key="idx"
+                      >{{ itm }}
+                      </span>
+                      <button v-if="vhId" @click="btnClick(item)" :disabled="loadingStatus">
+                      详情
+                    </button>
+                  </div>
+                  <!-- NEED id -->
+                  <listpopMobile
+                  v-if="showInfo_m"
+                  class="hist_td td-b"
+                  :lotteryList="popDataList"
+                  :vhId="vhId"/>
                 </div>
               </template>
               <!-- two display way -->
@@ -110,6 +118,7 @@ import { loto } from '../libs/metas'
 import contro from '../components/contro'
 import pageTitle from '../components/page-title'
 import listpop from '../components/listpop'
+import listpopMobile from '../components/listpopMobile'
 import loading from '../components/loading'
 import { NumPost, NavPost, getNowFormatDate } from '../api/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -125,6 +134,7 @@ export default {
       perPage: 10,
       pages: [],
       showPop: false,
+      showInfo_m: false,
       vhId: '',
       popDataList: null,
       openSetTitle: '开奖号码',
@@ -219,6 +229,19 @@ export default {
       }
       this.popDataList = data
     },
+    btnClick_mobile(i) {
+      let mobile = document.documentElement.clientWidth;
+       if (mobile >= 767) {
+         return
+       }
+      this.showInfo_m = !this.showInfo_m
+      let data = {
+        title: this.lotteryList,
+        official_issue_code: i.official_issue_code,
+        win_code: i.win_code,
+      }
+      this.popDataList = data
+    },
     closeBtn() {
       this.showPop = false
     },
@@ -273,6 +296,7 @@ export default {
   components: {
     contro,
     listpop,
+    listpopMobile,
     loading,
     pageTitle,
     VueAdsPagination,

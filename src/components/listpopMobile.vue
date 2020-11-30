@@ -1,32 +1,19 @@
 <template>
     <div class="cone">
-        <div class="row t-head">
-            <div class="flex2 img_lott">
-                    <div class="contt">
-                        <h3 class="dark">{{lotteryList.title}}</h3>
-                        <h5 class="dark">
-                            <span style="margin-right:6px ">期号:</span>{{lotteryList.official_issue_code}}<span>期</span>
-                        </h5>
-                    </div>
-            </div>
-            <div class="for_cont" @click="$emit('closeBtn')">
-                <img src="../assets/img/freeze/button_close.png" alt="button_close">
-            </div>
-        </div>
         <div class="num tgc">
 <!-- //越南-中南部-国家彩 & 越南-北部-国家彩 & 泰国彩-->
-         
-                <div v-for="item in lotteryList.win_code" :key="item.official_issue_code">
-                    <div class="row">
-                        <span class="t-title"><span>{{item.name}}</span></span>
+    
+            <div v-for="item in lotteryList.win_code" :key="item.official_issue_code">
+                <div class="row">
+                    <span class="t-title"><span>{{item.name}}</span></span>
 
-                        <div class="numberBox-b" :class="{'numberBox-a':item.resultList.length < 3}">            
-                            <div class="flex1" v-for="(item,index) in item.resultList" :key="item+index">
-                                <span> {{item.replace(/,/g, '')}} </span>
-                            </div>
-                        </div>    
-                    </div>   
-                </div>       
+                    <div class="numberBox-b" :class="{'numberBox-a':item.resultList.length < 3}">            
+                        <div class="flex1" v-for="(item,index) in item.resultList" :key="item+index">
+                            <span> {{item.replace(/,/g, '')}} </span>
+                        </div>
+                    </div>    
+                </div>   
+            </div>       
        
         </div>
     </div>
@@ -39,6 +26,7 @@
 </script>
 <style lang="scss" scoped>
     .cone{
+        // position: relative;
         text-align: center;
         background: #0F0F0F;
         color: #fff;
