@@ -8,6 +8,7 @@
       width: 80%;
       padding: 0;
       min-height: 500px;
+      margin-top: 30px;
       .lottery-container {
         background: #0f0f0f;
         height: 607px;
@@ -20,6 +21,15 @@
           margin: 24px 0;
           color: #fff;
           background: #0f0f0f;
+          .no-data,.wloading {
+            display: flex;
+            flex-direction: column;
+            padding: 10px auto;
+            width: 100%;
+            min-height: 222px;
+            align-items: center;
+            justify-content: center;
+          }
           .text-y {
             color: #f5d978;
           }
@@ -60,6 +70,13 @@
                 padding: 5px;
                 border-radius: 5px;
                 cursor: pointer;
+              }
+              &.td-b {
+                button {
+                  position: absolute;
+                  margin: 12px;
+                  right: 3px;
+                }
               }
             }
             :nth-child(3) {
@@ -138,12 +155,15 @@
   
   @media screen and (max-width: 767px) {
     .loto .container {
+      width: 100%;
       .lottery-container {
         height: auto;
         .hist_box {
+           margin: 0;
           .hist_inline-flex {
             flex-wrap: wrap;
             height: auto ;
+            min-height: 124px;
             .hist_td {
               flex: 0 0 50% ;
               padding: 0 9px;
@@ -153,19 +173,24 @@
                 line-height: 48px;
                 font-size: 27px;
                 text-align: center;
-                margin: 20px 4px;
+                margin: 16px 4px;
               }
               button {
               }
             }
-            :nth-child(1) {
+            .td-l {
               text-align: left;
+              padding: 0 0 0 9px;
             }
-            :nth-child(2) {
+            .td-r {
               text-align: right;
+              padding: 0 9px 0 0;
             }
-            :nth-child(3) {
+            .td-b {
               flex: 0 0 100%;
+              button {
+                display: none;
+              }
             }
           }
           .hist_light {

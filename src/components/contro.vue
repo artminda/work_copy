@@ -25,8 +25,12 @@
       </button>
     </div>
 
-    <span> > </span>
+    <div class="space-between">
 
+    <div class="arrow hidden-xs">
+      <img src="../assets/img/freeze/right_s.png" alt="right_s">
+    </div>
+    
     <v-select
     v-model="lottery"
     label="name"
@@ -41,8 +45,18 @@
       </select>
       </div> -->
 
-    <span> > </span>
+    <div class="arrow hidden-xs">
+      <img src="../assets/img/freeze/right_s.png" alt="right_s">
+    </div>
 
+    <v-select
+     v-if="lotteryList"
+    v-model="lotteryList"
+    label="name"
+    :options="lotteryArr" 
+    :reduce="item => item.name"
+    :components="{OpenIndicator}"
+    />
       <!-- <div class="btn">
         <select
           v-if="lotteryList"
@@ -52,7 +66,7 @@
           <option v-for="v in lotteryArr" :key="v.id">{{ v.name }}</option>
         </select>
       </div> -->
-
+    </div>
   </div>
 </template>
 
@@ -126,22 +140,38 @@ export default {
 }
 .contro{
   display: flex;
-  span {
+  flex-wrap: wrap;
+  .arrow {
     display: flex;
     align-items: center;
     margin: 5px 15px;
   }
+ .space-between {
+   display: flex;
   .v-select {
-    div { 
-      padding: 0;
+    div,input { 
       cursor: pointer;
+      padding: 0;
     }
-    .vs__dropdown-toggle {
+    .vs__dropdown-toggle,.vs__dropdown-menu {
+      background: #0f0f0f;
       padding: 0;
       .vs__selected-options{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
         min-width: 73px;
+        height: 27px;
+        .vs__selected {
+          position: relative;
+          padding: 0 10px;
+          color: #fff;
+          height: 27px;
+          margin: 0;
+        }
       }
-      .vs__clear,.vs__search{
+      .vs__clear{
         display: none;
       }
        .drop-background {
@@ -151,60 +181,22 @@ export default {
           background: url("../assets/img/freeze/down.png") no-repeat center;
         }
     }
+    .vs__dropdown-option{
+        color: #a1a1a1;
+      &:hover,&--highlight{
+        color: #fff;
+        background-color: #CE9C50;
+      }
+    }
   }
-
-  // .btn {
-  //   position: relative;
-  //   &::before {
-  //       position: absolute;
-  //       z-index: -1;
-  //       top: 0;
-  //       right: 0;
-  //       // transform: translateY(-25%);
-  //       width: 100%;
-  //       height: 100%;
-  //       /* 使用伪元素需加上content，否则无效 */
-  //       content: '';
-  //       background: url("../assets/img/freeze/down.png") no-repeat 97% center;
-  //       background-size: 8% 30%;
-  //       // transform: rotate(180deg);
-  //     &:focus {
-  //       transform: rotate(30deg);
-  //     }
-  //   }
-  //   .select_style {
-  //   text-align: center; 
-  //   color: #fff;
-  //   border-radius: 5px;
-  //   background: #0f0f0f;
-  //   & option {
-  //      color: #828282;
-  //   }
-  // }
-  //   select {
-  //       width: 200px;
-  //       padding: 5px;
-  //       /* 清楚select原始样式 */
-  //       -webkit-appearance: none;
-  //       -moz-appearance: none;
-  //       -ms-appearance: none;
-  //       appearance: none;
-  //   }
-  //   /* --ie清除--*/
-  //   select::-ms-expand{ display: none; }
-  // }
-
+ }
 
 .switch-button {
   width: 183px;
-  height: 27px;
+  height: 30px;
   text-align: center;
   position: relative;
-  // left: 0;
-  // top: 50%;
-  // transform: translate3D(-50%, -50%, 0);
   will-change: transform;
-  z-index: 2;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s ease all;
@@ -215,7 +207,6 @@ export default {
     background: #0f0f0f;
     width: 49%;
     height: 100%;
-    color: #151515;
     position: relative;
     border: none;
     transition: 0.3s ease all;
@@ -227,7 +218,7 @@ export default {
       position: relative;
       z-index: 99;
       &.black {
-        color: #828282;
+        color: #a1a1a1;
       }
       &.white {
         color: #fff;
@@ -256,11 +247,33 @@ export default {
 }
 }
 @media (max-width: 767px) {
+  .contro {
+    width: 94%;
+    margin: 0 auto; 
+  .space-between {
+   justify-content: space-between;
+   width: 100%;
+  .v-select {
+    height: 38px;
+    flex: 0 0 48%;
+    margin: 20px 0;
+    .vs__dropdown-option{
+        line-height: 38px;
+    }
+    .vs__dropdown-toggle {
+      .vs__selected-options {
+        height: 38px;
+        .vs__selected {
+            height: 38px;
+        }
+      }
+    }
+  }
+  }
   .switch-button {
-  width: 366px;
+  width: 100%;
   height: 38px;
-  left: 50%;
-  top: 50%;
+
   &-case {
     .text {
       font-size: 14px;
@@ -282,7 +295,7 @@ export default {
     }
   }
 }
-
+}
 }
 
 </style>

@@ -1,16 +1,16 @@
 <template>
     <div class="cone">
-        <div class="row">
+        <div class="row t-head">
             <div class="flex2 img_lott">
                     <div class="contt">
-                        <h3>{{lotteryList.title}}</h3>
-                        <h5>
+                        <h3 class="dark">{{lotteryList.title}}</h3>
+                        <h5 class="dark">
                             <span style="margin-right:6px ">期号:</span>{{lotteryList.official_issue_code}}<span>期</span>
                         </h5>
                     </div>
-                </div>
+            </div>
             <div class="for_cont" @click="$emit('closeBtn')">
-                <span>关闭</span>
+                <img src="../assets/img/freeze/button_close.png" alt="button_close">
             </div>
         </div>
         <div class="num tgc">
@@ -249,21 +249,22 @@
 </script>
 <style lang="scss" scoped>
     .cone{
-        background: #fff;
+        background: #0F0F0F;
+        color: #fff;
         width: 350px;
         padding: 0 0 20px;
-        h3,h5,h5 span,{
+        h3,h5,h5 span{
             color: #2c3e50;
             font-weight: 300;
         }
         .tables{
-            color: #2c3e50;
+            color: #fff;
             font-size: 16px;
         }
         margin: 0 auto;
-        border: 1px solid #dcdcdc;
+        border: 1px solid #CE9C50;
         border-radius: 5px;
-        box-shadow: 0 0 5px #dcdcdc;
+        // box-shadow: 0 0 5px #dcdcdc;
         color: #333;
         .num{
             text-align: center;
@@ -274,6 +275,10 @@
                     padding: 5px 0;
                 }
             }
+        }
+        .t-head {
+            background: -webkit-linear-gradient(280.03deg, #B48744 22.08%, #D9C26D 74.94%);
+            background: linear-gradient(280.03deg, #B48744 22.08%, #D9C26D 74.94%);
         }
         .row{
             display: flex;
@@ -290,24 +295,23 @@
                     padding: 10px;
                 }
                 .contt {
-                    padding-top: 15px;
-                    font-weight: 700;
+                    padding: 11px;
                     display: flex;
+                    align-items: center;
                     h3 {
-                        font-weight: 700;
+                        font-weight: 800;
                         cursor: pointer;
                         display: inline-block;
                         margin-left: 20px;
-                        font-size: 20px
+                        font-size: 14px;
+                        // line-height: 20px;
                     }
                     h5{
-                        font-size: 12px;
-                        color: #999;
+                        font-weight: 700;
                         margin-left: 10px;
-                        padding-top: 8px;
+                        // line-height: 17px;
                         span{
-                            font-weight: 700;
-                            font-size: 12px;
+                           font-weight: 500;
                         }
                     }
                 }
@@ -316,7 +320,8 @@
                 flex: 2;
             }
             .for_cont{
-                padding: 20px 10px 0 0;
+                display: flex;
+                padding: 7px;
                 text-align: right;
                 cursor: pointer;
                 a{

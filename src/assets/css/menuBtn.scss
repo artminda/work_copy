@@ -4,13 +4,12 @@ $bar-spacing: 9px;
 $bar-color: #ce9c50;
 
 .menu-wrapper {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 22px;
-  width: $bar-width;
-  height: $bar-height + $bar-spacing*2;
+  width: 60px;
+  height: 78px;
   cursor: pointer;
 }
 
@@ -24,7 +23,7 @@ $bar-color: #ce9c50;
 
 .hamburger-menu {
 	position: relative;
-	transform: translateY($bar-spacing);
+	// transform: translateY($bar-spacing);
 	background: $bar-color;
 	transition: all 0ms 300ms;
   

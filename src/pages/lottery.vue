@@ -26,10 +26,10 @@
             >
               <!-- two display way -->
               <template v-if="checkValue(item.win_code)">
-                <div class="hist_td">{{ item.official_issue_code }}期</div>
-                <div class="hist_td">{{ item.official_time }}</div>
+                <div class="hist_td td-l">{{ item.official_issue_code }}期</div>
+                <div class="hist_td td-r">{{ item.official_time }}</div>
 
-                <div class="hist_td hist_td_3">
+                <div class="hist_td td-b">
                   <span
                     v-for="(itm, idx) in item.win_code.split(',')"
                     :key="idx"
@@ -38,19 +38,17 @@
                 </div>
               </template>
               <template v-else>
-                <div class="hist_td">{{ item.official_issue_code }}期</div>
-                <div class="hist_td">{{ item.official_time }}</div>
-                <div class="hist_td">
+                <div class="hist_td td-l">{{ item.official_issue_code }}期</div>
+                <div class="hist_td td-r">{{ item.official_time }}</div>
+                <div class="hist_td td-b">
                   <span
                     v-for="(itm, idx) in item.win_code[0].resultList[0].split(
                       ','
                     )"
                     :key="idx"
-                    >{{ itm }}</span
-                  >
-                </div>
-                <div class="hist_td" v-if="vhId">
-                  <button @click="btnClick(item)" :disabled="loadingStatus">
+                    >{{ itm }}
+                    </span>
+                    <button v-if="vhId" @click="btnClick(item)" :disabled="loadingStatus">
                     详情
                   </button>
                 </div>
@@ -59,8 +57,8 @@
             </div>
           </template>
           <template v-else-if="tableData.length == 0 && loadingStatus == false">
-            <div style="position: relative; left: 100%; top: 60px">
-              暂无数据
+            <div class="no-data">
+               暂无数据
             </div>
           </template>
         </div>

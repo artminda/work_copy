@@ -10,8 +10,8 @@
             <img src="../assets/img/freeze/logo.png" class="logo hidden-xs" />
             <img src="../assets/img/freeze/logo-m.png" class="logo visible-xs" />
           </router-link>
-          <div class="menu-wrapper visible-xs">
-            <div @click="flag = !flag" class="hamburger-menu" :class="{'animate':flag}" />
+          <div @click="flag = !flag" class="menu-wrapper visible-xs">
+            <div class="hamburger-menu" :class="{'animate':flag}" />
           </div>
         </div>
         <!-- pc -->
