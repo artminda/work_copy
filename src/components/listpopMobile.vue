@@ -4,7 +4,7 @@
 <!-- //越南-中南部-国家彩 & 越南-北部-国家彩 & 泰国彩-->
     
             <div v-for="(item, i) in lotteryList.win_code" :key="`${i}_${item.official_issue_code}`">
-                <div class="row">
+                <div class="row" :class="{ hist_light: i % 2 !== 0}">
                     <span class="t-title"><span>{{item.name}}</span></span>
 
                     <div class="numberBox-b" :class="{'numberBox-a':item.resultList.length < 3}">            
@@ -137,6 +137,9 @@
                 }
             }
        
+        }
+         .hist_light {
+            background: #1c1c1c;
         }
     }
     .hist_td {

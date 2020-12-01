@@ -191,7 +191,6 @@
             }
             .vn-l-m {
               display: flex;
-              color: #F5D978;
               font-size: 14px;
               line-height: 20px;
               align-items: center;
@@ -202,10 +201,12 @@
               flex: 0 0 34% !important;
             }
             .vn-r-m {
-              color: #F5D978;
               font-size: 14px;
               text-align: center !important;
               flex: 0 0 56% !important;
+            }
+            .vn-active {
+              color: #F5D978;
             }
             .down {
               flex: 0 0 10% !important;

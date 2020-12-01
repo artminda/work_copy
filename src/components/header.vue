@@ -353,7 +353,7 @@ export default {
     font-size: 11px;
    .logo {
       width: 143px;
-      top: 6px;
+      top: 6px !important;
     }
     span {
       margin: 0;

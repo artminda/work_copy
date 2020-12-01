@@ -40,12 +40,12 @@
                 <!-- //越南-中南部-国家彩 & 越南-北部-国家彩 & 泰国彩-->
                   <template v-if="mobile">
                   <!-- mobile -->
-                    <div class="hist_td td-r vn-l-m" @click="btnClick_mobile(item)">
+                    <div class="hist_td td-r vn-l-m" @click="btnClick_mobile(item)" :class="{'vn-active':showInfo_m && item.issue_id === popDataList.issue_id}">
                       <!-- 以空格切分字串 -->
                       {{ item.official_time.split(/\s+/)[0] }}<br/>
                       {{ item.official_time.split(/\s+/)[1] }}
                       </div>
-                    <div class="hist_td td-l vn-r-m" @click="btnClick_mobile(item)">{{ item.official_issue_code }}期</div>
+                    <div class="hist_td td-l vn-r-m" @click="btnClick_mobile(item)" :class="{'vn-active':showInfo_m && item.issue_id === popDataList.issue_id}">{{ item.official_issue_code }}期</div>
                     <div class="down" @click="btnClick_mobile(item)">
                       <img 
                       :class="{'up':showInfo_m && item.issue_id === popDataList.issue_id}"
@@ -253,7 +253,6 @@ export default {
        if (mobile >= 767) {
          return
        }
-       console.log('i==>',i);
       //  open another
        if (this.popDataList && i.issue_id !== this.popDataList.issue_id){
          this.showInfo_m = true

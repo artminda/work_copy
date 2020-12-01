@@ -1,7 +1,7 @@
 <template>
     <footer>
             <div class="logo">
-              <img src="../assets/img/freeze/logo.png" alt="">
+              <img src="../assets/img/freeze/logo.png" alt="logo">
             </div>    
               <p class="col-12">©2020 by KK彩票, All Rights Reserved.</p>            
     </footer>

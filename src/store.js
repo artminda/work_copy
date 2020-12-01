@@ -52,7 +52,6 @@ export default new Vuex.Store({
           state.tableData = arr.filter((item) => item.win_code != '[]')
     },
     setLotteryList(state, res) {
-      console.log('setLotteryList::', res);
       let lotteryArr = []
         let name = [
           '伦敦1分彩',
