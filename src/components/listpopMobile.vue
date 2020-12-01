@@ -3,13 +3,13 @@
         <div class="num tgc">
 <!-- //越南-中南部-国家彩 & 越南-北部-国家彩 & 泰国彩-->
     
-            <div v-for="item in lotteryList.win_code" :key="item.official_issue_code">
+            <div v-for="(item, i) in lotteryList.win_code" :key="`${i}_${item.official_issue_code}`">
                 <div class="row">
                     <span class="t-title"><span>{{item.name}}</span></span>
 
                     <div class="numberBox-b" :class="{'numberBox-a':item.resultList.length < 3}">            
                         <div class="flex1" v-for="(item,index) in item.resultList" :key="item+index">
-                            <span> {{item.replace(/,/g, '')}} </span>
+                            <span :class="{yellow:i===0 || i===8}"> {{item.replace(/,/g, '')}} </span>
                         </div>
                     </div>    
                 </div>   
@@ -26,7 +26,7 @@
 </script>
 <style lang="scss" scoped>
     .cone{
-        // position: relative;
+        position: relative;
         text-align: center;
         background: #0F0F0F;
         color: #fff;
@@ -41,7 +41,7 @@
             display: flex;
             flex-wrap: wrap;
             width: 100%;
-            height: auto;
+            line-height: 35px;
             margin: auto;
             border-bottom: 1px solid #CE9C50;
             .t-title{
@@ -60,10 +60,8 @@
             .numberBox-a {
                 display: flex;
                 flex: 0 0 84%;
-                flex-direction: column;
-                padding: 5px 0;
+                flex-direction: column;        
                  .flex1{
-                    padding: 5px; 
                     span{
                         font-size: 14px;
                     }
@@ -73,10 +71,8 @@
                 display: flex;
                 flex-wrap: wrap;
                 flex: 0 0 84%;
-                padding: 5px 0;
                  .flex1{
-                    flex: 0 0 50%;
-                    padding: 5px; 
+                    flex: 0 0 50% !important;
                     justify-content: center;
                     span{
                         font-size: 14px;
@@ -84,7 +80,10 @@
                   }
             }
               
-            
+            .yellow {
+               color: #F5D978;
+               font-weight: 500; 
+            }
         
             .img_lott{
                 text-align: left;
@@ -139,5 +138,8 @@
             }
        
         }
+    }
+    .hist_td {
+        padding: 0 !important;
     }
 </style>
