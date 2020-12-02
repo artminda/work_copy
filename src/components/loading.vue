@@ -2,7 +2,7 @@
     <div class="spinner">
         <div class="loading">
         </div>
-        <span>数据加载中……</span>
+        <span>数据加载中 ...</span>
     </div>
 </template>
 <script>
@@ -12,7 +12,16 @@
 </script>
 <style lang="scss" scoped>
     .spinner{
-        text-align: center;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        height: 106px;
+        justify-content: center;
+        align-items: center;
+        top: 500px;
+        margin: 0 auto;
+        color: #fff;
     }
     .loading{
         width: 100%;
@@ -27,7 +36,7 @@
             position: absolute;
             width: 0px;
             height: 0px;
-            background: #333;
+            background: #f5d978;
             border-radius: 100%;
             top: 0;
             bottom: 0;
@@ -52,4 +61,10 @@
             opacity: 0;
         }
     }
+     @media screen and (max-width: 767px) {
+          .spinner{
+              width: 100vw;
+              top: 62vh;
+          }
+     }
 </style>

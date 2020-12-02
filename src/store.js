@@ -1,49 +1,43 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {official_classify,foreign_t,foreign_children} from '@/libs/lotoMap'
 import { NumPost, NavPost, getNowFormatDate } from './api/index'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  getters: {
+    tableData(state) {
+      return state.tableData
+    },
+    loadingStatus(state) {
+      return state.loadingStatus
+    },
+    lotteryList(state) {
+      return state.lotteryList
+    },
+    lotteryArr(state) {
+      return state.lotteryArr
+    },
+    lottery(state) {
+      return state.lottery
+    },
+    lotteryItem(state) {
+      return state.lotteryItem
+    }
+  },
+
   state: {
+    lottery: '时时彩', //二级默认数据
+    lotteryItem: [], //二级
+    country: '中国', //一级默认数据
+    lotteryList: '', //三级默认数据
+    lotteryArr: [], //三级
     loadingStatus: false,
     tableData: [],
     countryName: ['中国', '外国'],//一级
-    official_classify: [
-      { name: '时时彩', id: 1 },
-      { name: '11选5', id: 2 },
-      { name: 'PK10', id: 3 },
-      { name: '快3', id: 4 },
-      { name: '快乐8', id: 5 },
-      { name: '幸运28', id: 6 },
-      { name: '六合彩', id: 7 },
-      { name: '福彩3D', id: 8 },
-      { name: 'CQ-快10', id: 9 },
-      { name: 'GX-快10', id: 10 }
-    ],
-    foreign_t: [
-      { name: '伦敦', id: 0 },
-      { name: '河内', id: 1 },
-      { name: '东京', id: 2 },
-      { name: '仰光', id: 3 },
-      { name: '澳洲', id: 4 },
-      { name: '加拿大', id: 5 },
-      { name: '斯洛伐克', id: 6 },
-      { name: '越南-北部-国家彩', id: 105 },
-      { name: '越南-中南部-国家彩', id: 104 },
-      { name: '泰国彩', id: 106 }
-    ],
-    foreign_children: [
-      { name: '伦敦1分彩', id: 1000001 },
-      { name: '河内1分彩', id: 1000005 },
-      { name: '东京1分彩', id: 1000009 },
-      { name: '仰光1分彩', id: 1000013 },
-      { name: '澳洲3分彩', id: 1000017 },
-      { name: '加拿大3分彩', id: 1000018 },
-      { name: '斯洛伐克5分彩', id: 1000019 },
-      { name: '泰国彩', id: 2000036 }
-    ],
   },
+
   mutations: {
     setNumPost(state, res) {
       let arr = []
@@ -57,20 +51,85 @@ export default new Vuex.Store({
           })
           state.tableData = arr.filter((item) => item.win_code != '[]')
     },
+    setLotteryList(state, res) {
+      let lotteryArr = []
+        let name = [
+          '伦敦1分彩',
+          '伦敦2分彩',
+          '伦敦3分彩',
+          '伦敦5分彩',
+          '河内1分彩',
+          '河内2分彩',
+        ]
+        let filterData = []
+        res.forEach((item) => {
+          if (name.includes(item.lottoCnname)) {
+            return
+          } else {
+            if (item.id === '50') {
+              item.lottoCnname = '广西快乐十分'
+            }
+            filterData.push({ name: item.lottoCnname, id: item.lottoId })
+          }
+        })
+        lotteryArr = filterData
+        state.lotteryArr = lotteryArr
+        state.lotteryList = lotteryArr[0].name
+    },
     setNewValue(state, value){
        state[value[0]] = value[1]
-       console.log('[MU]-loadingStatus:',state[value[0]]);
     }
   },
+
   actions: {
-    actionClick({ commit }) {
-      commit('input', 'input!!')
+    init_country({ state,dispatch,commit }){
+      if (state.country === '中国') {
+        //国内彩系列表
+        commit('setNewValue', ['lottery',official_classify[0].name])
+        commit('setNewValue', ['lotteryItem',official_classify])
+        dispatch('getNavList',official_classify[0].id)
+      } else {
+        //外国彩系列表
+        commit('setNewValue', ['lottery',foreign_t[0].name])
+        commit('setNewValue', ['lotteryItem',foreign_t])
+      }
     },
 
+    //国内彩种列表
+    getNavList({ commit }, id ) {
+      commit('setNewValue', ['loadingStatus',true])
+      NavPost(id).then((res) => {
+        commit('setLotteryList', res)
+        commit('setNewValue', ['loadingStatus',false])
+      })
+    },
+
+      //越南彩泰国彩彩种
+      foreign_childrens_vh({ commit },id) {
+        commit('setNewValue', ['lotteryArr',[]])
+        NavPost(id).then((res) => {
+          let arr = []
+          res.forEach((item) => {
+            arr.push({ name: item.lottoCnname, id: item.lottoId })
+          }),
+          commit('setNewValue', ['lotteryArr', arr ])
+          commit('setNewValue', ['lotteryList', arr[0].name ])
+        })
+      },
+
+      //其他外国彩种列表
+      foreign_childrens({ commit},id) {
+        const lottery = foreign_children[id]
+        const arr = []
+        arr.push(lottery)
+        commit('setNewValue', ['lotteryArr', arr ])
+        commit('setNewValue', ['lotteryList', arr[0].name ])
+      },
+   
+    //表格数据
     gitNumPost({ commit }, id) {
       commit('setNewValue', ['loadingStatus',true])
       NumPost(id).then((res) => {
-        console.log('res', res),
         commit('setNumPost', res)
         commit('setNewValue', ['loadingStatus',false])
       })
@@ -80,12 +139,5 @@ export default new Vuex.Store({
       commit('input', inputValue)
     }
   },
-  getters: {
-    tableData(state) {
-      return state.tableData
-    },
-    loadingStatus(state) {
-      return state.loadingStatus
-    }
-  }
+
 })

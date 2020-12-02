@@ -1,10 +1,6 @@
 <template>
     <div class="case-block" @click="fn" ref="buttom">
         {{text}}
-<!--        <transition name="fadeInLeft" enter-active-class="animated fadeInLeft"-->
-<!--                    leave-active-class="animated fadeInLeft">-->
-<!--            <p v-if="show"></p>-->
-<!--        </transition>-->
     </div>
 </template>
 <script>
@@ -17,18 +13,16 @@
         },
         methods:{
             fn(){
-                // if (this.text=='点击查看详情'){
-                //     this.text='收起'
-                // }else {
-                //     this.text='点击查看详情'
-                // }
-                // this.$emit('chack',this.text)
+                if (this.text=='返回首页'){
+                    this.$router.push('/')
+                }else {
+                    // this.text='点击查看详情'
+                }
             },
         },
     }
 </script>
 <style lang="scss" scoped>
-    /*@import "../assets/css/animation.css";*/
     .case-block{
         display: flex;
         justify-content: center;
