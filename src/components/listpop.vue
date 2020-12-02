@@ -13,7 +13,7 @@
                 <img src="../assets/img/freeze/button_close.png" alt="button_close">
             </div>
         </div>
-        <div class="num tgc">
+        <div class="num">
 <!-- //越南-中南部-国家彩 & 越南-北部-国家彩 & 泰国彩-->
          
                 <div v-for="(item, i) in lotteryList.win_code" :key="item.official_issue_code">

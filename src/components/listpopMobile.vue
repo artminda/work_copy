@@ -1,6 +1,6 @@
 <template>
     <div class="cone">
-        <div class="num tgc">
+        <div class="num">
 <!-- //越南-中南部-国家彩 & 越南-北部-国家彩 & 泰国彩-->
     
             <div v-for="(item, i) in lotteryList.win_code" :key="`${i}_${item.official_issue_code}`">
@@ -33,6 +33,9 @@
         width: 406px;
         margin: 0 auto;
         border: 1px solid #CE9C50;
+        .num {
+            width: 100%;
+        }
         .t-head {
             background: -webkit-linear-gradient(280.03deg, #B48744 22.08%, #D9C26D 74.94%);
             background: linear-gradient(280.03deg, #B48744 22.08%, #D9C26D 74.94%);

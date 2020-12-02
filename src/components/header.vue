@@ -356,7 +356,7 @@ export default {
       top: 6px !important;
     }
     span {
-      margin: 0;
+      margin: 0 !important;
       padding-right: 12px;
     }
   }

@@ -6,20 +6,21 @@
     font-size: 12px;
   
     .container {
-      width: 80%;
+      max-width: 990px;
       padding: 0;
       min-height: 500px;
       margin-top: 30px;
       .lottery-container {
         background: #0f0f0f;
-        height: 607px;
+        min-height: 607px;
         width: 100%;
         position: relative;
+        padding-bottom: 44px;
         .hist_box {
           display: flex;
           flex-wrap: wrap;
           flex-direction: row;
-          margin: 24px 0;
+          margin: 24px 0 0 0;
           color: #fff;
           background: #0f0f0f;
           .no-data,.wloading {
@@ -42,7 +43,7 @@
             flex-wrap: wrap;
             align-items: center;
             width: 100%;
-            height: 52px;
+            min-height: 52px;
             background: #0f0f0f;
             .hist_td {
               flex: 0 0 27%;
@@ -52,7 +53,7 @@
                 display: inline-block;
                 font-weight: 500;
                 font-size: 18px;
-                letter-spacing: 0px;
+                letter-spacing: 1px;
                 border: 1px solid #f5d978;
                 border-radius: 50%;
                 width: 30px;
@@ -76,20 +77,47 @@
                 cursor: pointer;
               }
               &.td-b {
+                flex: 0 0 46%;
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                padding: 5px 0;
+                max-width: 438px;
+                margin: 0 auto;
+
                 button {
-                  position: absolute;
+                  position: relative;
                   margin: 12px;
                   right: 3px;
                 }
+                .min {
+                  width: 32px;
+                  height: 32px;
+                  line-height: 32px;
+                  font-size: 18px;
+                  margin: 5px;
+                }
               }
             }
-            :nth-child(3) {
-              flex: 0 0 46%;
-            }
+            // :nth-child(3) {
+            //   flex: 0 0 46%;
+            // }
           }
           .hist_light {
             background: #1c1c1c;
           }
+          .line::after {
+            content: '';
+            position: relative;
+            width: 100%;
+            height: 1px;
+            background: url(../assets/img/freeze/line.png) no-repeat top center;
+            background-size: contain;
+          }
+        }
+        .m-0 {
+          margin: 0;
+          width: 100%;
         }
         .pagination {
           position: absolute;
@@ -97,6 +125,7 @@
           margin: 0 auto;
           bottom: 0;
           display: flex;
+          flex-wrap: wrap;
           justify-content: center;
           align-items: center;
           font-size: 12px;
@@ -115,6 +144,14 @@
           }
           .vue-ads-leading-loose {
             display: none;
+          }
+          &::before {
+            content: '';
+            position: relative;
+            width: 100%;
+            height: 1px;
+            background: url(../assets/img/freeze/line.png) no-repeat top center ;
+            background-size: contain;
           }
         }
       }
@@ -164,6 +201,31 @@
     }
   }
   
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to
+  /* .list-leave-active for below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  .list-move {
+    transition: transform 1s;
+  }
+  @media screen and (min-width: 768px) and (max-width:1024px) { 
+    .loto .container {
+      width: 100%;
+      .lottery-container .hist_box .hist_inline-flex {
+        height: auto;
+        .hist_td.td-b {
+          max-width: 350px;
+          .min {
+            margin: 2px 1px;
+          }
+        }
+      }
+    }
+  }
   @media screen and (max-width: 767px) {
     .loto .container {
       width: 100%;
@@ -174,7 +236,8 @@
           .hist_inline-flex {
             flex-wrap: wrap;
             height: auto ;
-            min-height: 124px;
+            min-height: 121px;
+            padding: 0;
             .hist_td {
               flex: 0 0 50% ;
               padding: 0 9px;
@@ -184,9 +247,7 @@
                 line-height: 48px;
                 font-size: 27px;
                 text-align: center;
-                margin: 16px 4px;
-              }
-              button {
+                margin: 0;
               }
             }
             .vn-l-m {
@@ -216,17 +277,34 @@
             }
             .td-l {
               text-align: left;
-              padding: 0 0 0 9px;
+              padding: 10px 0 10px 9px;
+              line-height: 21px;
             }
             .td-r {
               text-align: right;
-              padding: 0 9px 0 0;
+              padding: 10px 9px 10px 0;
+              line-height: 21px;
             }
             .td-b {
-              flex: 0 0 100%;
+              display: flex;
+              justify-content: space-around;
+              flex-wrap: wrap;
+              flex: 0 0 100% !important;
+              padding: 5px 0;
+              max-width: 375px;
+              margin: 0 auto;
               button {
                 display: none;
               }
+              .min {
+                margin: 5px 2px !important;
+              }
+            }
+            .p-b {
+              padding-bottom: 15px !important;
+            }
+            .listpopMobile {
+              max-width: 100% !important;
             }
           }
           .accordion {
@@ -271,3 +349,10 @@
       }
     }
   }
+
+// iphone 5 size
+@media screen and (max-width: 321px) {
+  .loto .container .lottery-container .hist_box .hist_inline-flex .td-b .min {
+    margin: 3px 0px !important;
+  }
+}

@@ -6,8 +6,6 @@
 
     <div class="Box row active animated " :class="{'row-reverse ':datas.direction === 'reverse'}"
             v-animated="{ className: 'fadeInRight' }">
-
-      <!-- <p class="des hidden-xs">{{datas.desInfo}}</p> -->
   
         <!-- 圖片 -->
         <div class="col-6 col-xs-12 about-pic">
@@ -87,6 +85,14 @@ export default {
 }
 .pro-b {
   background: url(../assets/img/freeze/bg_pro_b.jpg) no-repeat;
+   &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 766px;
+        background: url(../assets/img/freeze/line.png) no-repeat top center;
+        background-size: contain;
+  }
 }
 .pro-c {
   background: url(../assets/img/freeze/bg_pro_c.jpg) no-repeat;
@@ -98,10 +104,10 @@ export default {
   -o-background-size: cover;
   background-size: cover;
   min-height: 700px;
-  padding-bottom: 66px;
   .container {
     max-width: 882px;
     color: #fff;
+    margin-bottom: 72px;
   .Box {
     padding-top: 10px;
     .shrink {
@@ -150,6 +156,7 @@ export default {
   .about,.pro-a,.pro-b,.pro-c {
     .container {
     min-height: 0px;
+    margin-bottom: 0;
     padding-bottom: 0px;
     .Box {
       padding-top: 33px !important;

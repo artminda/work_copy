@@ -8,14 +8,15 @@
 
       <section class="lottery-container" :class="{'blur':showPop || loadingStatus}">
         <div class="hist_box" key="showInfo_m">
-          <div class="hist_inline-flex text-y t-head">
+          <div class="hist_inline-flex text-y t-head line">
             <div class="hist_td">期数</div>
             <div class="hist_td">时间</div>
-            <div class="hist_td">{{ openSetTitle }}</div>
+            <div class="hist_td td-b">{{ openSetTitle }}</div>
             <div class="hist_td" v-if="vhId"></div>
           </div>
 
           <template v-if="tableData.length !== 0">
+            <transition-group name="list" tag="span" class="hist_box m-0">
             <div
               class="hist_inline-flex"
               :class="{ hist_light: id % 2 === 0, hist_light_m: id % 2 !== 0, accordion:!checkValue(item.win_code) }"
@@ -27,12 +28,18 @@
                 <div class="hist_td td-l">{{ item.official_issue_code }}期</div>
                 <div class="hist_td td-r">{{ item.official_time }}</div>
 
-                <div class="hist_td td-b">
+                <div class="hist_td td-b p-b">
                   <span
                     v-for="(itm, idx) in item.win_code.split(',')"
                     :key="idx"
+                    :class="{'min':item.win_code.split(',').length >= 8}"
                     >{{ itm }}</span
                   >
+                    <!-- <span
+                    v-for="(itm, idx) in item.win_code.split(',')"
+                    :key="`${idx}_test_快8`"
+                    :class="{'min':item.win_code.split(',').length >= 8}"
+                    >{{ itm }}</span> -->
                 </div>
               </template>
               
@@ -57,12 +64,8 @@
                     <div class="hist_td td-l vn-m">{{ item.official_issue_code }}期</div>
                     <div class="hist_td td-r vn-m">{{ item.official_time }}</div>
                     <div class="hist_td td-b">
-                      <span
-                        v-for="(itm, idx) in item.win_code[0].resultList[0].split(
-                          ','
-                        )"
-                        :key="idx"
-                        >{{ itm }}
+                        <span
+                          v-for="(itm, idx) in item.win_code[0].resultList[0].split(',')" :key="idx">{{ itm }}
                         </span>
                         <button v-if="vhId" @click="btnClick(item)" :disabled="loadingStatus">
                         详情
@@ -72,13 +75,14 @@
                   <transition name="listpopMobile">
                       <listpopMobile
                       v-if="showInfo_m && item.issue_id === popDataList.issue_id"
-                      class="hist_td td-b"
+                      class="hist_td td-b listpopMobile"
                       :lotteryList="popDataList"
                       :vhId="vhId"/>
                   </transition>                
               </template>
               <!-- two display way -->
             </div>
+             </transition-group>
           </template>
           <template v-else-if="tableData.length == 0 && loadingStatus == false">
             <div class="no-data">
@@ -86,33 +90,35 @@
             </div>
           </template>
         </div>
-
-        <vue-ads-pagination
-          class="pagination"
-          :totalItems="tableData.length"
-          :items-per-page="10"
-          :max-visible-pages="3"
-          :page="page - 1"
-          :loading="loadingStatus"
-          @page-change="pageChange"
-        >
-          <template slot-scope="props">
-            <div class="vue-ads-pr-2 vue-ads-leading-loose">
-              Items {{ props.start }} - {{ props.end }} : Total
-              {{ props.total }}
-            </div>
-          </template>
-          <template slot="buttons" slot-scope="props">
-            <vue-ads-page-button
-              v-for="(button, key) in props.buttons"
-              :key="key"
-              v-bind="button"
-              class="page-item"
-              :class="{ buttonAct: button.active }"
-              @page-change="page = button.page + 1"
-            />
-          </template>
-        </vue-ads-pagination>
+        
+         <transition name="list">
+          <vue-ads-pagination
+            v-if="tableData.length >= 10"
+            class="pagination"
+            :totalItems="tableData.length"
+            :items-per-page="10"
+            :max-visible-pages="3"
+            :page="page - 1"
+            :loading="loadingStatus"
+          >
+            <template slot-scope="props">
+              <div class="vue-ads-pr-2 vue-ads-leading-loose">
+                Items {{ props.start }} - {{ props.end }} : Total
+                {{ props.total }}
+              </div>
+            </template>
+            <template slot="buttons" slot-scope="props">
+              <vue-ads-page-button
+                v-for="(button, key) in props.buttons"
+                :key="key"
+                v-bind="button"
+                class="page-item"
+                :class="{ buttonAct: button.active }"
+                @page-change="page = button.page + 1"
+              />
+            </template>
+          </vue-ads-pagination>
+         </transition>
       </section>
 
       <div class="into_footer">奖源稳定 准确无误</div>
@@ -166,9 +172,12 @@ export default {
       }
     },
     country() {
+      this.page = 1
       this.init_country()
     },
     lottery(v1, v2) {
+      this.page = 1
+
       let a = official_classify.some((item) => {
         return item.name == v1
       })
@@ -192,6 +201,8 @@ export default {
       }
     },
     lotteryList(value) {
+      this.page = 1
+
       let lottery = this.lotteryArr.find((item) => {
         return item.name == value
       })
@@ -228,9 +239,6 @@ export default {
       let from = page * perPage - perPage
       let to = page * perPage
       return tableData.slice(from, to)
-    },
-    pageChange(page) {
-      this.page = page
     },
     checkValue(value) {
       if (value instanceof Object) {

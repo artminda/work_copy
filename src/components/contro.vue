@@ -1,8 +1,5 @@
 <template>
   <div class="contro">
-    <!-- <select class="btn btn-default btn-xs" v-model="country">
-      <option v-for="v in countryName" :key="v" class="handle">{{ v }}</option>
-    </select> -->
 
     <div class="switch-button">
       <div
@@ -39,33 +36,19 @@
     :components="{OpenIndicator}"
     />
 
-     <!-- <div class="btn">
-      <select v-model="lottery" class="select_style">
-        <option v-for="v in lotteryItem" :key="v.id">{{ v.name }}</option>
-      </select>
-      </div> -->
-
     <div class="arrow hidden-xs">
       <img src="../assets/img/freeze/right_s.png" alt="right_s">
     </div>
 
     <v-select
-     v-if="lotteryList"
-    v-model="lotteryList"
+    v-model="lotteryList" 
+    v-if="lotteryList"
     label="name"
     :options="lotteryArr" 
     :reduce="item => item.name"
     :components="{OpenIndicator}"
     />
-      <!-- <div class="btn">
-        <select
-          v-if="lotteryList"
-          v-model="lotteryList"
-          class="select_style"
-        >
-          <option v-for="v in lotteryArr" :key="v.id">{{ v.name }}</option>
-        </select>
-      </div> -->
+  
     </div>
   </div>
 </template>
@@ -95,6 +78,14 @@ export default {
   computed: {
     ...mapState(['countryName','country']),
 
+    lottery: {
+      get() {
+        return this.$store.getters.lottery
+      },
+      set(val) {
+        this.$store.commit('setNewValue', ['lottery', val])
+      },
+    },
     lotteryList: {
       get() {
         return this.$store.getters.lotteryList
@@ -109,14 +100,6 @@ export default {
       },
       set(val) {
         this.$store.commit('setNewValue', ['lotteryArr', val])
-      },
-    },
-    lottery: {
-      get() {
-        return this.$store.getters.lottery
-      },
-      set(val) {
-        this.$store.commit('setNewValue', ['lottery', val])
       },
     },
     lotteryItem: {
