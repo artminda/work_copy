@@ -31,6 +31,7 @@
     <v-select
     v-model="lottery"
     label="name"
+    :searchable="false"
     :options="lotteryItem" 
     :reduce="item => item.name"
     :components="{OpenIndicator}"
@@ -44,6 +45,7 @@
     v-model="lotteryList" 
     v-if="lotteryList"
     label="name"
+    :searchable="false"
     :options="lotteryArr" 
     :reduce="item => item.name"
     :components="{OpenIndicator}"
@@ -118,14 +120,6 @@ export default {
 </script>
 
 <style lang="scss" scope>
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-    -webkit-appearance: none !important;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield;
-}
-
 .select-selected {
   background-color: DodgerBlue;
 }
@@ -144,6 +138,7 @@ input[type="number"] {
       cursor: pointer;
       padding: 0;
     }
+    input {pointer-events: none;}
     .vs__dropdown-toggle,.vs__dropdown-menu {
       background: #0f0f0f;
       padding: 0;
