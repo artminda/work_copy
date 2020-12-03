@@ -99,7 +99,7 @@ export default new Vuex.Store({
     getNavList({ commit }, id ) {
       commit('setNewValue', ['loadingStatus',true])
       NavPost(id).then((res) => {
-        console.log('getNavList',res);
+        // console.log('getNavList',res);
         commit('setLotteryList', res)
         commit('setNewValue', ['loadingStatus',false])
       })
@@ -113,7 +113,7 @@ export default new Vuex.Store({
           res.forEach((item) => {
             arr.push({ name: item.lottoCnname, id: item.lottoId })
           },
-          console.log('NavPost',arr)
+          // console.log('NavPost',arr)
           ),
           commit('setNewValue', ['lotteryArr', arr ])
           commit('setNewValue', ['lotteryList', arr[0].name ])
@@ -133,7 +133,7 @@ export default new Vuex.Store({
     gitNumPost({ commit }, id) {
       commit('setNewValue', ['loadingStatus',true])
       NumPost(id).then((res) => {
-        console.log('NumPost',res);
+        // console.log('NumPost',res);
         commit('setNumPost', res)
         commit('setNewValue', ['loadingStatus',false])
       })
