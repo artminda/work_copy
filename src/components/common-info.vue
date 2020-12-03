@@ -123,8 +123,8 @@ export default {
     align-items: center;
   }
   img {
-    width: 377px;
-    height: 245px;
+    width: 100%;
+    // height: 245px;
   }
     .desBox {
       padding-bottom: 61px;
@@ -147,6 +147,14 @@ export default {
     }
   }
 }
+ @media screen and (max-width: 1020px) and (min-width: 768px) {
+  .about,.pro-a,.pro-b,.pro-c {
+    min-height: 0px;
+    .shrink {
+      flex: 0 0 43%;
+      }
+  }
+ }
 
 @media (max-width: 767px) {
     img {

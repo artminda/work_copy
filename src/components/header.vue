@@ -6,7 +6,7 @@
     >
       <div class="container">
         <div class="navbar-header">
-          <router-link to="/" class="navbar-brand">
+          <router-link to="/" v-scroll-to="'#tp_banner'" class="navbar-brand">
             <img src="../assets/img/freeze/logo.png" class="logo hidden-xs" />
             <img src="../assets/img/freeze/logo-m.png" class="logo visible-xs" />
           </router-link>
@@ -266,7 +266,7 @@ export default {
     display: none;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .navbar.navbar-default,
   .navbar-default.scrolled {
     .logo {

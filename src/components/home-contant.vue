@@ -57,13 +57,13 @@ export default {
 <style lang="scss" scoped>
 .contant {
    overflow: hidden;
+   width: 100%;
    background: url(../assets/img/freeze/bg-contant.jpg) no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 410px;
-  padding-bottom: 66px;
+  padding: 18px 0 66px 0;
   
   .iconBox {
     display: flex;
@@ -93,6 +93,11 @@ export default {
     }
   }
 }
+ @media screen and (max-width: 1020px) and (min-width: 768px) {
+    .contant {
+     padding: 43px 0 43px 0;
+    }
+ }
 
  @media (max-width: 640px){
    .contant {

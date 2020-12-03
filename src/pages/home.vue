@@ -8,7 +8,6 @@
             v-animated="{ className: 'fadeInDown' }"
           >
             <div class="logoBox">
-              <img src="../assets/img/freeze/logo_rainbow.png" class="logo"/>
               <div class="text">
                 <h3>十年老牌胜券在握</h3>
                 <p>
@@ -51,13 +50,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-//     -webkit-appearance: none !important;
-// }
-
-// input[type="number"] {
-//     -moz-appearance: textfield;
-// }
 
 .tp-banner-container {
   max-height: none;
@@ -87,7 +79,6 @@ export default {
     .tp-caption {
       text-align: center;
       margin: auto;
-      // margin-top: 388px;
       font-size: 24px;
       font-weight: 700;
       line-height: 34.75px;
@@ -96,16 +87,21 @@ export default {
         position: relative;
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: 100vw;
         height: 700px;
         justify-content: center;
         align-items: center;
+        background: url("../assets/img/freeze/logo_rainbow.png") no-repeat center;
+        background-position-x: 48%;
+        background-position-y: 30%; 
+        background-size: 940px;
+        
         .logo {
           width: 1000px;
         }
         .text {
             position: relative;
-            bottom: 20%;
+             bottom: -130px;
             h3 {
                 width: 100%;      
                 color: #fff;
@@ -123,32 +119,40 @@ export default {
      &::after {
         content: '';
         position: absolute;
-        width: 1440px;
+        width: 100%;
         height: 700px;
         background: url(../assets/img/freeze/line.png) no-repeat;
         background-position-y: 100%;
+        background-size: contain;
   }
  }
 }
-@media screen and (max-width: 768px) {
+
+@media screen and (max-width: 767px) {
     .tp-banner-container {
       height: 100vh;
       padding-top: 100px;
       .tp-banner {
           .tp-caption {
             .logoBox {
-              height: 80vh;  
+              height: calc(100vh - 100px);
               overflow: hidden;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              background-size: 190%;
+              background-position-x: 51%;
               .logo {
                 width: 650px ;
                 top: 0;
               }
               .text {
-                  bottom: 15%;
-              p {
-                 width: 100vw; 
-                 padding: 0 15px;
-              }
+                  bottom: -100px;
+                  p {
+                    width: 100vw; 
+                    padding: 0 15px;
+                    margin-bottom: 20px !important;
+                  }
             }
           }
         }

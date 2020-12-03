@@ -130,9 +130,19 @@ export default {
     opacity: 1;
   }
 }
+ @media screen and (max-width: 1020px) and (min-width: 768px) {
+  .thumb {
+       width: 350px;
+       .swiper.gallery-thumbs .swiper-slide {
+          width: 42%; 
+       }
+    }  
+    .control {
+        width: 350px;
+     }
 
-
-  @media (max-width: 768px) {
+ } 
+  @media (max-width: 767px) {
     .thumb {
        width: 100vw;
        .swiper.gallery-thumbs .swiper-slide {

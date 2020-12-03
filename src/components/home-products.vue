@@ -11,7 +11,7 @@
             <img :src="datas.img2" class="m-r" alt="b2" >
         </div>
 
-      <!-- conter -->
+      <!-- center -->
       <div class="row-center index-c">
         <img :src="datas.img3" class="m-c" alt="3" >
       </div>  
@@ -87,7 +87,29 @@ export default {
     }
   }
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 1025px) and (min-width: 768px) {
+  .products {
+    min-height: 570px;
+  .animatedBox {
+      .m-c {
+        max-width: 450px; 
+      }
+      .m-r {
+          max-width: 300px;
+        }
+      .m-l {
+          max-width: 300px;
+      }
+      .index-r {
+         left: 170px;
+      }
+      .index-l {
+         right: 170px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 767px) {
 .products {
   min-height: unset;
   .animatedBox {
